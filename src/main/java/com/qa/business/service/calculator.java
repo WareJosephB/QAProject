@@ -1,19 +1,21 @@
 package com.qa.business.service;
 
+import java.util.Arrays;
+
 import com.qa.persistence.domain.Game;
 import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 
 public class calculator {
 
-	private double ELOchange(double pA, double pB, double s, double k) {
-
+	private double ELOchange(double pA, double pB, double s, double k) {  // Calculate change in ELO for player A due to winning (s = 1), drawing (=0.5), losing (=0)
+																		  // against player B with weighting K.
 		double F = Math.pow(10, (pA - pB) / 400);
 		double E = Math.pow(1 + F, -1);
 		return k * (s - E);
 	}
 
-	private double[] allELO(Player player, double[] player2, double s, double k, Game game) {
+	private double[] allELO(Player player, double[] player2, double s, double k, Game game) {  // Sweeps through all 7 ELOs for a player vs. a list of ELOs and returns the change to their ELOs
 
 		double[] ELO1 = player.returnELOs();
 		double[] ELO2 = player2;
@@ -47,7 +49,7 @@ public class calculator {
 		return changes;
 	}
 
-	private double[] getAverage(Player player, Game game) {
+	private double[] getAverage(Player player, Game game) {  // Gets array of average ELOs for each field of players in game
 
 		double[] average = new double[7];
 		double[] ave = new double[game.returnScores().length];
@@ -62,7 +64,7 @@ public class calculator {
 		return average;
 	}
 
-	private double getAverageS(Player player, Game game) {
+	private double getAverageS(Player player, Game game) {  // Finds "average win" for a player in a game
 
 		double S = 0;
 		int H = game.returnScores().length - 1;
@@ -85,15 +87,20 @@ public class calculator {
 		return S / H;
 	}
 
-	private double[] AverageELO(Player player, Game game) {
+	private double[] AverageELO(Player player, Game game) {    // Finds change for "average player, average game" method, weighting K = 32
 
-		double S = getAverageS(player, game);
-		int K = 32;
+		double S = getAverageS(player, game);                      
+		int K = 32;                                                
 		double[] pBs = getAverage(player, game);
 		return allELO(player, pBs, S, K, game);
 
 	}
 
+	
+	/*-
+	 *  BELOW is the code to update the player for an 'average player, average win' method.
+	 */
+	
 	public void updateAverageELO(Player player, Game game) {
 		double[] G = AverageELO(player, game);
 		double[] H = player.returnELOs();
@@ -104,7 +111,7 @@ public class calculator {
 		player.updateELO(H);
 	}
 
-	private double[] afterAverageELO(Player player, Game game) {
+	private double[] afterAverageELO(Player player, Game game) {   // Finds change for "average ELO change method", weighting 16
 
 		double[] average = { 0, 0, 0, 0, 0, 0, 0 };
 		int Score = 0;
@@ -146,6 +153,10 @@ public class calculator {
 		return average;
 
 	}
+	
+	/*-
+	 *  BELOW is the code to update the player for an 'average ELOchange' method.
+	 */
 
 	public void updateAverageAfterELO(Player player, Game game) {
 		double[] H = afterAverageELO(player, game);
@@ -160,9 +171,28 @@ public class calculator {
 
 	}
 	
-//	public void updateSME(Player player, Game game) {
-//			ORDER game.Scores, find player.name, ELO above - ELO below
-//	}
+	public int compareTo(Score ob) {
+		return name.compareTo(ob.getName());
+	}
+	
+	public void updateSME(Player player, Game game) {
+		double[] average = { 0, 0, 0, 0, 0, 0, 0 };
+		int Score = 0;
+
+		for (Score score : game.returnScores()) {
+			if (player.returnName().equals(score.getName())) {
+				Score = score.getScore();
+			}
+		}
+		Comparator<Score> byScore = (e1, e2) -> Integer.compare(
+	            e1.getScore, e2.getScore);
+
+	    employees.stream().sorted(byEmployeeNumber)
+	            .forEach(e -> System.out.println(e));
+		
+		
+			ORDER game.Scores, find player.name, ELO above - ELO below
+	}
 	
 	
 	
