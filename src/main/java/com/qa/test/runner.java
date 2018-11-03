@@ -6,9 +6,11 @@ import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 
 public class runner {
+	
+	private runner() {}
 
 	public static void main(String[] args) {
-
+		
 		Player ben = new Player("Ben");
 		Player joseph = new Player("Joseph");
 		Player vinul = new Player("Vinul");

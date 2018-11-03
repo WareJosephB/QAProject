@@ -6,8 +6,12 @@ import com.qa.persistence.domain.Score;
 
 public class calculator {
 
-	private static double ELOchange(double ELOPlayer, double ELOOpponent, double result, double weighting) { // Calculate change in ELO for
-																						// player A
+	private static double ELOchange(double ELOPlayer, double ELOOpponent, double result, double weighting) { // Calculate
+																												// change
+																												// in
+																												// ELO
+																												// for
+		// player A
 		// due to
 		// winning (s = 1), drawing (=0.5),
 		// losing
@@ -29,7 +33,7 @@ public class calculator {
 				average += score.getPlayer().getELO();
 		}
 
-		return average / (game.returnNumPlayers() -1);
+		return average / (game.returnNumPlayers() - 1);
 	}
 
 	private static double getAverageS(Player player, Game game) { // Finds "average win" for a player in a game
@@ -228,6 +232,24 @@ public class calculator {
 
 	}
 
+	private static double updateScoreBasedweightedWeightedBonusNoPenalty(Player player, Game game) {
+		double weighting = 32 / game.returnNumPlayers();
+		double S = 0;
+		double _S = 0;
+		for (Score score : game.returnScores()) {
+			if (score.getPlayer().equals(player)) {
+				S = score.getScore();
+				if (score.getPlace() == 1) {
+					S += 20;
+				}
+
+			}
+			_S += score.getScore();
+		}
+		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
+
+	}
+
 	private static double updateScoreBasedweightedUnWeightedBonus(Player player, Game game) {
 		double weighting = 32 / game.returnNumPlayers();
 		double S = 0;
@@ -248,6 +270,94 @@ public class calculator {
 
 	}
 
+	private static double updateScoreAvScoreBasedweightedUnWeightedBonus(Player player, Game game) {
+		double weighting = 32 / game.returnNumPlayers();
+		double S = 0;
+		double _S = 0;
+		for (Score score : game.returnScores()) {
+			if (score.getPlayer().equals(player)) {
+				S = score.getScore();
+				if (score.getPlace() == 1) {
+					S += 20;
+				} else {
+					S -= 5;
+				}
+
+			}
+			_S += score.getScore();
+
+		}
+		S -= _S / (game.returnNumPlayers() - 1);
+		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
+
+	}
+	
+	private static double updateScoreAvScoreBasedUnWeightedUnWeightedBonus(Player player, Game game) {
+		double weighting = 16;
+		double S = 0;
+		double _S = 0;
+		for (Score score : game.returnScores()) {
+			if (score.getPlayer().equals(player)) {
+				S = score.getScore();
+				if (score.getPlace() == 1) {
+					S += 20;
+				} else {
+					S -= 5;
+				}
+
+			}
+			_S += score.getScore();
+
+		}
+		S -= _S / (game.returnNumPlayers() - 1);
+		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
+
+	}
+	
+	private static double updateScoreAvScoreBasedweightedWeightedBonus(Player player, Game game) {
+		double weighting = 32 / game.returnNumPlayers();
+		double S = 0;
+		double _S = 0;
+		for (Score score : game.returnScores()) {
+			if (score.getPlayer().equals(player)) {
+				S = score.getScore();
+				if (score.getPlace() == 1) {
+					S += 20;
+				} else {
+					S -= 20/(game.returnNumPlayers()-1);
+				}
+
+			}
+			_S += score.getScore();
+
+		}
+		S -= _S / (game.returnNumPlayers() - 1);
+		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
+
+	}
+	
+	private static double updateScoreAvScoreBasedUnWeightedWeightedBonus(Player player, Game game) {
+		double weighting = 16;
+		double S = 0;
+		double _S = 0;
+		for (Score score : game.returnScores()) {
+			if (score.getPlayer().equals(player)) {
+				S = score.getScore();
+				if (score.getPlace() == 1) {
+					S += 20;
+				} else {
+					S -= 20/(game.returnNumPlayers()-1);
+				}
+
+			}
+			_S += score.getScore();
+
+		}
+		S -= _S / (game.returnNumPlayers() - 1);
+		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
+
+	}
+
 	public static void UpdateAfterGame(Game game) {
 		double[] ELOs = new double[game.returnNumPlayers()];
 		int i = 0;
@@ -264,16 +374,20 @@ public class calculator {
 	}
 
 	private static double updateScore(Player player, Game game) { // All of the different methods
-//		updateScoreBasedweightedUnWeightedBonus(player, game);
-//		updateScoreBasedweightedWeightedBonus(player, game);
-//		updateScoreBasedweighted(player, game);
-//		updateScoreBasedUnweighted(player, game);
-//		updateSME(player, game);
-//		updateAverageChangeWeighted(player, game);
-//		updateAverageChangeUnWeighted(player, game);
-//		updateAverageELOUnWeighted(player, game);
-//		updateAverageELOWeighted(player, game);
-		return updateAverageELOWeighted(player, game);
+//		return updateScoreBasedweightedUnWeightedBonus(player, game);
+//		return updateScoreBasedweightedWeightedBonus(player, game);
+//		return updateScoreBasedweighted(player, game);
+//		return updateScoreBasedUnweighted(player, game);
+//		return updateSME(player, game);
+		return updateAverageChangeWeighted(player, game);
+//		return updateAverageChangeUnWeighted(player, game);
+//		return updateAverageELOUnWeighted(player, game);
+//		return updateAverageELOWeighted(player, game);
+//		return updateScoreBasedweightedWeightedBonusNoPenalty(player, game);
+//		return updateScoreAvScoreBasedweightedUnWeightedBonus(player, game);
+//		return updateScoreAvScoreBasedweightedWeightedBonus(player, game);
+//		return updateScoreAvScoreBasedUnWeightedWeightedBonus(player, game);
+//		return updateScoreAvScoreBasedUnWeightedUnWeightedBonus(player, game);
 	}
 
 }

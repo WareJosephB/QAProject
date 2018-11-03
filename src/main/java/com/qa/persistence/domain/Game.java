@@ -8,8 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Game {
 
-	private Game() {}
-	
+
 	public Game(Score[] scores) {
 		this.scores = scores;
 	}

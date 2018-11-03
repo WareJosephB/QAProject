@@ -1,5 +1,8 @@
 package com.qa.persistence.domain;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,8 +10,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Player {
-
-	private Player() {}
 	
 	public Player(String name) {
 		
@@ -35,7 +36,9 @@ public class Player {
 	}
 	
 	public String toString() {
-		return this.getName()+": "+String.valueOf(this.getELO());
+		DecimalFormat form = new DecimalFormat("#.00");
+		form.setRoundingMode(RoundingMode.DOWN);
+		return this.getName()+": "+String.valueOf(form.format(this.getELO()));
 	}
 
 
