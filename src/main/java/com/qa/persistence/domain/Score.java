@@ -30,12 +30,13 @@ public class Score {
 	}
 
 	public Score(int place, Player player, int score) {
+		this.place = place;
 		this.player = player;
 		this.score = score;
 	}
 
 	public int getPlace() {
-		return place;
+		return this.place;
 	}
 
 

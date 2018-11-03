@@ -6,16 +6,16 @@ import com.qa.persistence.domain.Score;
 
 public class calculator {
 
-	private static double ELOchange(double pA, double pB, double actual, double k) { // Calculate change in ELO for
+	private static double ELOchange(double ELOPlayer, double ELOOpponent, double result, double weighting) { // Calculate change in ELO for
 																						// player A
 		// due to
 		// winning (s = 1), drawing (=0.5),
 		// losing
 		// (=0)
-		// against player B with weighting K.
-		double temp = Math.pow(10, (pA - pB) / 400);
+		// against player B, with weighting K.
+		double temp = Math.pow(10, (ELOOpponent - ELOPlayer) / 400);
 		double expected = Math.pow(1 + temp, -1);
-		return k * (actual - expected);
+		return weighting * (result - expected);
 	}
 
 	private static double getAverage(Player player, Game game) { // Gets array of average ELOs for each field of players
@@ -28,9 +28,8 @@ public class calculator {
 			if (!score.getPlayer().equals(player))
 				average += score.getPlayer().getELO();
 		}
-		average = average / game.returnNumPlayers();
 
-		return average;
+		return average / (game.returnNumPlayers() -1);
 	}
 
 	private static double getAverageS(Player player, Game game) { // Finds "average win" for a player in a game
@@ -46,7 +45,7 @@ public class calculator {
 		}
 		for (Score score : game.returnScores()) {
 			if (!player.equals(score.getPlayer())) {
-				if (score.getScore() > I) {
+				if (score.getScore() < I) {
 					S += 1;
 				} else if (score.getScore() == I) {
 					S += 0.5;
@@ -100,7 +99,7 @@ public class calculator {
 		}
 
 		for (Score score : game.returnScores()) {
-			if (player.equals(score.getPlayer())) {
+			if (!player.equals(score.getPlayer())) {
 				double S;
 				if (score.getScore() < Score) {
 					S = 1;
@@ -113,7 +112,7 @@ public class calculator {
 			}
 
 		}
-		return average / game.returnNumPlayers();
+		return average;
 
 	}
 
@@ -133,7 +132,7 @@ public class calculator {
 		}
 
 		for (Score score : game.returnScores()) {
-			if (player.equals(score.getPlayer())) {
+			if (!player.equals(score.getPlayer())) {
 				double S;
 				if (score.getScore() < Score) {
 					S = 1;
@@ -146,7 +145,7 @@ public class calculator {
 			}
 
 		}
-		return average / game.returnNumPlayers();
+		return average;
 
 	}
 
@@ -157,6 +156,7 @@ public class calculator {
 		for (Score score : game.returnScores()) {
 			if (player.equals(score.getPlayer())) {
 				Place = score.getPlace();
+				break;
 			}
 		}
 
@@ -164,6 +164,7 @@ public class calculator {
 			for (Score score : game.returnScores()) {
 				if (score.getPlace() == Place - 1) {
 					average += ELOchange(player.getELO(), score.getPlayer().getELO(), 0d, 16d);
+					break;
 				}
 			}
 		}
@@ -171,6 +172,7 @@ public class calculator {
 			for (Score score : game.returnScores()) {
 				if (score.getPlace() == Place + 1) {
 					average += ELOchange(player.getELO(), score.getPlayer().getELO(), 1d, 16d);
+					break;
 				}
 			}
 		}
@@ -271,7 +273,7 @@ public class calculator {
 //		updateAverageChangeUnWeighted(player, game);
 //		updateAverageELOUnWeighted(player, game);
 //		updateAverageELOWeighted(player, game);
-		return updateScoreBasedweightedUnWeightedBonus(player, game);
+		return updateAverageELOWeighted(player, game);
 	}
 
 }
