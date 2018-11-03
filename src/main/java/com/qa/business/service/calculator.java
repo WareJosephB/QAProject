@@ -1,82 +1,49 @@
 package com.qa.business.service;
 
-import java.util.Arrays;
-
 import com.qa.persistence.domain.Game;
 import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 
 public class calculator {
 
-	private double ELOchange(double pA, double pB, double s, double k) {  // Calculate change in ELO for player A due to winning (s = 1), drawing (=0.5), losing (=0)
-																		  // against player B with weighting K.
-		double F = Math.pow(10, (pA - pB) / 400);
-		double E = Math.pow(1 + F, -1);
-		return k * (s - E);
+	private double ELOchange(double pA, double pB, double actual, double k) { // Calculate change in ELO for player A
+																				// due to
+																				// winning (s = 1), drawing (=0.5),
+																				// losing
+																				// (=0)
+																				// against player B with weighting K.
+		double temp = Math.pow(10, (pA - pB) / 400);
+		double expected = Math.pow(1 + temp, -1);
+		return k * (actual - expected);
 	}
 
-	private double[] allELO(Player player, double[] player2, double s, double k, Game game) {  // Sweeps through all 7 ELOs for a player vs. a list of ELOs and returns the change to their ELOs
+	private double getAverage(Player player, Game game) { // Gets array of average ELOs for each field of players in
+															// game
 
-		double[] ELO1 = player.returnELOs();
-		double[] ELO2 = player2;
-		double[] changes = new double[7];
-		changes[0] = ELOchange(ELO1[0], ELO2[0], s, k);
+		double average;
 
-		if (game.returnP()) {
-			changes[1] = ELOchange(ELO1[1], ELO2[1], s, k);
-			changes[5] = 0;
-			if (game.returnC()) {
-				changes[3] = ELOchange(ELO1[3], ELO2[3], s, k);
-			} else {
-				changes[3] = 0;
-			}
-		} else {
-			changes[1] = 0;
-			changes[5] = ELOchange(ELO1[5], ELO2[5], s, k);
-			if (!game.returnC()) {
-				changes[6] = ELOchange(ELO1[6], ELO2[6], s, k);
-			} else {
-				changes[6] = 0;
-			}
+		for (Score score : game.returnScores()) {
+			if (!score.getPlayer().equals(player))
+				average += score.getPlayer().getELO();
 		}
-		if (game.returnC()) {
-			changes[2] = ELOchange(ELO1[2], ELO2[2], s, k);
-			changes[4] = 0;
-		} else {
-			changes[2] = 0;
-			changes[4] = ELOchange(ELO1[4], ELO2[4], s, k);
-		}
-		return changes;
-	}
+		average = average / game.returnNumPlayers();
 
-	private double[] getAverage(Player player, Game game) {  // Gets array of average ELOs for each field of players in game
-
-		double[] average = new double[7];
-		double[] ave = new double[game.returnScores().length];
-		int i = 0;
-
-		while (i < ave.length) {
-			for (Score score : game.returnScores()) {
-				average[i] += score.getPlayer().returnELOs()[i];
-			}
-			average[i] = average[i] / game.returnScores().length;
-		}
 		return average;
 	}
 
-	private double getAverageS(Player player, Game game) {  // Finds "average win" for a player in a game
+	private double getAverageS(Player player, Game game) { // Finds "average win" for a player in a game
 
 		double S = 0;
-		int H = game.returnScores().length - 1;
+		int H = game.returnNumPlayers() - 1;
 		int I = 0;
 
 		for (Score score : game.returnScores()) {
-			if (player.returnName().equals(score.getName())) {
+			if (player.equals(score.getPlayer())) {
 				I = score.getScore();
 			}
 		}
 		for (Score score : game.returnScores()) {
-			if (!player.returnName().equals(score.getName())) {
+			if (!player.equals(score.getPlayer())) {
 				if (score.getScore() > I) {
 					S += 1;
 				} else if (score.getScore() == I) {
@@ -87,48 +54,39 @@ public class calculator {
 		return S / H;
 	}
 
-	private double[] AverageELO(Player player, Game game) {    // Finds change for "average player, average game" method, weighting K = 32
+	private double AverageELO(Player player, Game game) { // Finds change for "average player, average game" method,
+															// weighting K = 32
 
-		double S = getAverageS(player, game);                      
-		int K = 32;                                                
-		double[] pBs = getAverage(player, game);
-		return allELO(player, pBs, S, K, game);
+		double S = getAverageS(player, game);
+		double K = 32;
+		double pB = getAverage(player, game);
+		return ELOchange(player.getELO(), pB, S, K);
 
 	}
 
-	
 	/*-
 	 *  BELOW is the code to update the player for an 'average player, average win' method.
 	 */
-	
-	public void updateAverageELO(Player player, Game game) {
-		double[] G = AverageELO(player, game);
-		double[] H = player.returnELOs();
-		int i = 0;
-		while (i < G.length) {
-			H[i] += G[i];
-		}
-		player.updateELO(H);
+
+	public void updateAverageELOUnweighted(Player player, Game game, double ELO) {
+		ELO += AverageELO(player, game);
 	}
 
-	private double[] afterAverageELO(Player player, Game game) {   // Finds change for "average ELO change method", weighting 16
+	private double afterAverageELOUnWeighted(Player player, Game game) { // Finds change for "average ELO change method",
+																// weighting 16
 
-		double[] average = { 0, 0, 0, 0, 0, 0, 0 };
-		int Score = 0;
+		double average = 0;
+		int Score;
+		double weighting = 16;
 
 		for (Score score : game.returnScores()) {
-			if (player.returnName().equals(score.getName())) {
+			if (player.equals(score.getPlayer())) {
 				Score = score.getScore();
 			}
 		}
-		if (Score == 0) {
-			double[] average1 = { 1, 1 };
-			return average1;
-		}
 
 		for (Score score : game.returnScores()) {
-			double[] average1 = { 0, 0, 0, 0, 0, 0, 0 };
-			if (player.returnName().equals(score.getName())) {
+			if (player.equals(score.getPlayer())) {
 				double S;
 				if (score.getScore() < Score) {
 					S = 1;
@@ -137,66 +95,89 @@ public class calculator {
 				} else {
 					S = 0;
 				}
-				average1 = allELO(player, score.getPlayer().returnELOs(), S, 16, game);
+				average += ELOchange(player.getELO(), score.getPlayer().getELO(), S, weighting);
 			}
-			int i = 0;
-			while (i < average1.length) {
-				average[i] = average1[i];
-				i++;
-			}
+
 		}
-		int i = 0;
-		while (i < average.length) {
-			average[i] = average[i] / (game.returnScores().length - 1);
-			i++;
-		}
-		return average;
+		return average / game.returnNumPlayers();
 
 	}
-	
+
+	private double afterAverageELOWeighted(Player player, Game game) { // Finds change for "average ELO change method",
+		// weighting 16
+
+		double average = 0;
+		int Score;
+		double weighting = 32/game.returnNumPlayers();
+
+		for (Score score : game.returnScores()) {
+			if (player.equals(score.getPlayer())) {
+				Score = score.getScore();
+			}
+		}
+
+		for (Score score : game.returnScores()) {
+			if (player.equals(score.getPlayer())) {
+				double S;
+				if (score.getScore() < Score) {
+					S = 1;
+				} else if (score.getScore() == Score) {
+					S = 0.5;
+				} else {
+					S = 0;
+				}
+				average += ELOchange(player.getELO(), score.getPlayer().getELO(), S, weighting);
+			}
+
+		}
+		return average / game.returnNumPlayers();
+
+	}
+
 	/*-
 	 *  BELOW is the code to update the player for an 'average ELOchange' method.
 	 */
 
-	public void updateAverageAfterELO(Player player, Game game) {
-		double[] H = afterAverageELO(player, game);
-		double[] I = { 0, 0, 0, 0, 0, 0, 0 };
-		int i = 0;
-		while (i < player.returnELOs().length) {
-			I[i] += H[i];
-			i++;
-
-		}
-		player.updateELO(I);
+	public void updateAverageAfterELOUnWeighted(Player player, Game game, double ELO) {
+		ELO += afterAverageELOUnWeighted(player, game);
 
 	}
 	
-	public int compareTo(Score ob) {
-		return name.compareTo(ob.getName());
+	public void updateAverageAfterELO(Player player, Game game, double ELO) {
+		ELO += afterAverageELOWeighted(player, game);
+
 	}
-	
-	public void updateSME(Player player, Game game) {
-		double[] average = { 0, 0, 0, 0, 0, 0, 0 };
-		int Score = 0;
+
+	public double updateSME(Player player, Game game) {
+		double average;
+		int Place;
 
 		for (Score score : game.returnScores()) {
-			if (player.returnName().equals(score.getName())) {
-				Score = score.getScore();
+			if (player.equals(score.getPlayer())) {
+				Place = score.getPlace();
 			}
 		}
-		Comparator<Score> byScore = (e1, e2) -> Integer.compare(
-	            e1.getScore, e2.getScore);
 
-	    employees.stream().sorted(byEmployeeNumber)
-	            .forEach(e -> System.out.println(e));
-		
-		
-			ORDER game.Scores, find player.name, ELO above - ELO below
+		if (1 != Place) {
+			for (Score score : game.returnScores()) {
+				if (score.getPlace() == Place - 1) {
+					average += ELOchange(player.getELO(), score.getPlayer().getELO(), 0d, 16d);
+				}
+			}
+		}
+		if (game.returnNumPlayers() != Place) {
+			for (Score score : game.returnScores()) {
+				if (score.getPlace() == Place + 1) {
+					average += ELOchange(player.getELO(), score.getPlayer().getELO(), 1d, 16d);
+				}
+			}
+		}
+
+		return average;
 	}
-	
-	
-	
-	
-	
+
+	public void updateAfterSME(Player player, Game game, double ELO) {
+		ELO += updateSME(player, game);
+	}
 
 }

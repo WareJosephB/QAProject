@@ -36,5 +36,9 @@ public class Game {
 	public Score[] returnScores() {
 		return this.scores;
 	}
+	
+	public int returnNumPlayers() {
+		return this.scores.length;
+	}
 
 }
