@@ -8,6 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Player {
 
+	private Player() {}
+	
 	public Player(String name) {
 		
 		this.ELO = 1500;
@@ -30,6 +32,10 @@ public class Player {
 	
 	public void updateELO(double ELO) {
 		this.ELO += ELO;
+	}
+	
+	public String toString() {
+		return this.getName()+": "+String.valueOf(this.getELO());
 	}
 
 

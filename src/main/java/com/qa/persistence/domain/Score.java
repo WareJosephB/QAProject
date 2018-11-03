@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Score {
+	
+	private Score() {}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
