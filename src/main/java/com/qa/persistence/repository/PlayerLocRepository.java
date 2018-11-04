@@ -3,7 +3,7 @@ package com.qa.persistence.repository;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class PlayerLocRepository implements PlayerRepositoriable{
+public class PlayerLocRepository implements PlayerRepositoriable {
 
 	public String getAll() {
 		// TODO Auto-generated method stub

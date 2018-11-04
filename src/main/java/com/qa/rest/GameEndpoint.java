@@ -14,7 +14,7 @@ public class GameEndpoint implements Pointable {
 
 	@Inject
 	private GameService service;
-	
+
 	public void setService(GameService service) {
 		this.service = service;
 	}

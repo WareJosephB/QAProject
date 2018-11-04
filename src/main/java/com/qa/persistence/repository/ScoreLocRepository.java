@@ -3,7 +3,7 @@ package com.qa.persistence.repository;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class ScoreLocRepository implements ScoreRepositoriable{
+public class ScoreLocRepository implements ScoreRepositoriable {
 
 	public String getAll() {
 		// TODO Auto-generated method stub

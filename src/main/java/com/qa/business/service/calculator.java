@@ -291,7 +291,7 @@ public class calculator {
 		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
 
 	}
-	
+
 	private static double updateScoreAvScoreBasedUnWeightedUnWeightedBonus(Player player, Game game) {
 		double weighting = 16;
 		double S = 0;
@@ -313,7 +313,7 @@ public class calculator {
 		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
 
 	}
-	
+
 	private static double updateScoreAvScoreBasedweightedWeightedBonus(Player player, Game game) {
 		double weighting = 32 / game.returnNumPlayers();
 		double S = 0;
@@ -324,7 +324,7 @@ public class calculator {
 				if (score.getPlace() == 1) {
 					S += 20;
 				} else {
-					S -= 20/(game.returnNumPlayers()-1);
+					S -= 20 / (game.returnNumPlayers() - 1);
 				}
 
 			}
@@ -335,7 +335,7 @@ public class calculator {
 		return ELOchange(player.getELO(), getAverage(player, game), S / _S, weighting);
 
 	}
-	
+
 	private static double updateScoreAvScoreBasedUnWeightedWeightedBonus(Player player, Game game) {
 		double weighting = 16;
 		double S = 0;
@@ -346,7 +346,7 @@ public class calculator {
 				if (score.getPlace() == 1) {
 					S += 20;
 				} else {
-					S -= 20/(game.returnNumPlayers()-1);
+					S -= 20 / (game.returnNumPlayers() - 1);
 				}
 
 			}
