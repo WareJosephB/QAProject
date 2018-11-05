@@ -6,11 +6,12 @@ import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 
 public class runner {
-	
-	private runner() {}
+
+	private runner() {
+	}
 
 	public static void main(String[] args) {
-		
+
 		Player ben = new Player("Ben");
 		Player joseph = new Player("Joseph");
 		Player vinul = new Player("Vinul");
@@ -18,15 +19,16 @@ public class runner {
 		Player andy = new Player("Andy");
 		Player malcolm = new Player("Malcolm");
 		Player jon = new Player("Jon");
+		Player john = new Player("John");
 
 		Score score1 = new Score(1, joseph, 127);
 		Score score2 = new Score(2, ben, 114);
 		Game game1 = new Game(new Score[] { score1, score2 });
 		calculator.UpdateAfterGame(game1);
 
-		System.out.println(ben);
-		System.out.println(joseph);
-		System.out.println("---");
+//		System.out.println(ben);
+//		System.out.println(joseph);
+//		System.out.println("---");
 
 		Score score3 = new Score(1, joseph, 73);
 		Score score4 = new Score(2, ben, 68);
@@ -35,10 +37,10 @@ public class runner {
 
 		calculator.UpdateAfterGame(game2);
 
-		System.out.println(ben);
-		System.out.println(vinul);
-		System.out.println(joseph);
-		System.out.println("---");
+//		System.out.println(ben);
+//		System.out.println(vinul);
+//		System.out.println(joseph);
+//		System.out.println("---");
 
 		Score score6 = new Score(1, ben, 60);
 		Score score7 = new Score(2, kyle, 53);
@@ -49,12 +51,12 @@ public class runner {
 
 		calculator.UpdateAfterGame(game3);
 
-		System.out.println(ben);
-		System.out.println(kyle);
-		System.out.println(joseph);
-		System.out.println(andy);
-		System.out.println(malcolm);
-		System.out.println("---");
+//		System.out.println(ben);
+//		System.out.println(kyle);
+//		System.out.println(joseph);
+//		System.out.println(andy);
+//		System.out.println(malcolm);
+//		System.out.println("---");
 
 		Score score11 = new Score(1, joseph, 65);
 		Score score12 = new Score(2, ben, 65);
@@ -65,23 +67,37 @@ public class runner {
 
 		calculator.UpdateAfterGame(game4);
 
-		System.out.println(ben);
-		System.out.println(vinul);
-		System.out.println(joseph);
-		System.out.println(jon);
-		System.out.println(malcolm);
-		System.out.println("---");
+//		System.out.println(ben);
+//		System.out.println(vinul);
+//		System.out.println(joseph);
+//		System.out.println(jon);
+//		System.out.println(malcolm);
+//		System.out.println("---");
 
 		Score score16 = new Score(1, joseph, 84);
 		Score score17 = new Score(2, ben, 83);
 		Score score18 = new Score(3, andy, 71);
 		Game game5 = new Game(new Score[] { score16, score17, score18 });
 
+		Score score19 = new Score(2, joseph, 65);
+		Score score20 = new Score(1, ben, 70);
+		Score score22 = new Score(3, john, 52);
+		Score score23 = new Score(5, malcolm, 38);
+		Game game6 = new Game(new Score[] { score19, score20, score22, score23 });
+
 		calculator.UpdateAfterGame(game5);
 
+//		System.out.println(ben);
+//		System.out.println(joseph);
+//		System.out.println(andy);
+//		System.out.println("---");
+		
+		calculator.UpdateAfterGame(game6);
+		
 		System.out.println(ben);
 		System.out.println(joseph);
-		System.out.println(andy);
+		System.out.println(john);
+		System.out.println(malcolm);
 		System.out.println("---");
 
 	}

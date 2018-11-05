@@ -4,11 +4,11 @@ import javax.inject.Inject;
 
 import com.qa.persistence.repository.GameRepositoriable;
 
-public class GameService implements Servicable{
+public class GameService implements Servicable {
 
 	@Inject
 	private GameRepositoriable repo;
-	
+
 	public String getAll() {
 		return repo.getAll();
 	}

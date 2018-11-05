@@ -10,11 +10,11 @@ import javax.ws.rs.Produces;
 import com.qa.business.service.ScoreService;
 
 @Path("/score")
-public class ScoreEndpoint implements Pointable{
+public class ScoreEndpoint implements Pointable {
 
 	@Inject
 	private ScoreService service;
-	
+
 	public void setService(ScoreService service) {
 		this.service = service;
 	}

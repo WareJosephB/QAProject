@@ -10,11 +10,11 @@ import javax.ws.rs.Produces;
 import com.qa.business.service.PlayerService;
 
 @Path("/player")
-public class PlayerEndpoint  implements Pointable{
+public class PlayerEndpoint implements Pointable {
 
 	@Inject
 	private PlayerService service;
-	
+
 	public void setService(PlayerService service) {
 		this.service = service;
 	}

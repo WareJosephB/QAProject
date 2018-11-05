@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<script type="text/javascript" language="javascript" src="APscripts.js">
+</script>
+</head>
+
+<body>
+<a href = index.html>Home</a>
+
+<br>---<br>
+
+<form>
+Player name: <input type="text" name="name" id = "newName"><br>
+ELO: <input type="number" name="ELO" value="1500" id = "initELO"><br>
+<input type="submit" value="Add Player" onclick = "addPlayer()">
+</form>
+
+<br>---<br>
+
+<form>
+Player ID number: <input type="number" name="deleteID"><br>
+<input type="submit" value="Delete Player" onclick = "deletePlayer()">
+</form>
+
+<br>---<br>
+
+<form>
+Player ID number: <input type="number" name="updateID"><br>
+Player name: <input type="text" name="newName"><br>
+<input type="submit" value="Change Player Name">
+</form>
+
+<br>---<br>
+
+<form>
+<input type="submit" value="Get all players" onclick = "getAllPlayers()"><br><br>
+<div id = "allPlayers"></div>
+
+
+</body>
+</html>

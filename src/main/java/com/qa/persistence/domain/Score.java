@@ -7,8 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Score {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -37,7 +36,5 @@ public class Score {
 	public int getPlace() {
 		return this.place;
 	}
-
-
 
 }
