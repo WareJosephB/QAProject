@@ -1,2 +1,0 @@
-INSERT INTO Player VALUES (Joseph);
-INSERT INTO Player VALUES (Ben);
