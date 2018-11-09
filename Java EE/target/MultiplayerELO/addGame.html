@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+
+<html>
+<head><script type="text/javascript" language='javascript' src='AGscripts.js'>
+</script></head>
+
+<body>
+<form>
+
+
+<select name="map">
+  <option value="1" selected>Tharsis</option>
+  <option value="2">Hellas</option>
+  <option value="3">Elysium</option>
+</select> 
+
+<select name="players" id="numberOfPlayers" onselect="generatePlayerFields();">
+  <option value="-1">---</option>
+  <option value="2">2 Player</option>
+  <option value="3">3 Player</option>
+  <option value="4">4 Player</option>
+  <option value="5">5 Player</option>
+</select><br>
+
+<input type="checkbox" name="corporate">Corporate Era?<br>
+<input type="checkbox" name="prelude">Preludes?<br>
+<input type="checkbox" name="venus">Venus Next?<br>
+
+<div id="playerfields"></div>
+
+<input type="submit" value="Submit">
+</form>
+</body></html>
