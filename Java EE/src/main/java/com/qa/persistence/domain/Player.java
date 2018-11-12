@@ -11,10 +11,13 @@ import javax.persistence.Id;
 @Entity
 public class Player {
 
+	private int numberPlayed;
+
 	public Player(String name) {
 
 		this.ELO = 1500;
 		this.name = name;
+		this.setNumberPlayed(0);
 	}
 
 	@Id
@@ -38,7 +41,15 @@ public class Player {
 	public String toString() {
 		DecimalFormat form = new DecimalFormat("#.00");
 		form.setRoundingMode(RoundingMode.DOWN);
-		return this.getName() + ": " + String.valueOf(form.format(this.getELO()));
+		return this.getName() + ": " + String.valueOf(form.format(this.getELO())) + " from " + String.valueOf(this.getNumberPlayed());
+	}
+
+	public int getNumberPlayed() {
+		return numberPlayed;
+	}
+
+	public void setNumberPlayed(int numberPlayed) {
+		this.numberPlayed = numberPlayed;
 	}
 
 }
