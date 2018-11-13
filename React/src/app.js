@@ -26,7 +26,7 @@ class App extends Component {
         event.preventDefault();
         axios.get(playroot+document.getElementById('playId').value)
           .then(function(response) {
-            document.getElementById('output').src = playerParse(response);
+            document.getElementById('output').src = response;
             console.log(response);
             }
         )
@@ -36,7 +36,7 @@ class App extends Component {
         event.preventDefault();
         axios.get(gameroot+document.getElementById('gameId').value)
           .then(function(response) {
-            document.getElementById('output').src = gameParse(response);
+            document.getElementById('output').src = response;
             console.log(response);
             }
         )
