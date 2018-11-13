@@ -33,6 +33,10 @@ public class Player {
 	public String getName() {
 		return this.name;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public void updateELO(double ELO) {
 		this.ELO += ELO;

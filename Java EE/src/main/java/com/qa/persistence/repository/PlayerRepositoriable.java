@@ -8,5 +8,7 @@ public interface PlayerRepositoriable {
 	String delete(int id);
 
 	String get(int id);
+	
+	String changeName(int id, String name);
 
 }

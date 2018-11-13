@@ -60,4 +60,15 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		this.util = util;
 	}
 
+	@Override
+	public String changeName(int id, String name) {
+		Player player = manager.find(Player.class, id);
+		if (player != null) {
+			player.setName(name);
+			return "{\"message\": \"Player update succesfully.\"}";
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
+	}
+
 }

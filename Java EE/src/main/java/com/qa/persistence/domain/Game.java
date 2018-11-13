@@ -11,6 +11,16 @@ public class Game {
 	public Game(Score[] scores) {
 		this.scores = scores;
 	}
+	
+	public Game(int map, boolean P, boolean C, boolean V, int generations, Score[] scores) {
+		this.scores = scores;
+		this.map = map;
+		this.P = P;
+		this.C = C;
+		this.V = V;
+		this.generations = generations;
+		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +40,7 @@ public class Game {
 	public boolean returnC() {
 		return this.C;
 	}
-	
+
 	public boolean returnV() {
 		return this.V;
 	}
@@ -46,5 +56,28 @@ public class Game {
 	public int returnNumPlayers() {
 		return this.scores.length;
 	}
+
+	public void changeAddons(boolean P, boolean C, boolean V) {
+		this.P = P;
+		this.C = C;
+		this.V = V;
+	}
+
+	public void changeMap(int map) {
+		this.map = map;
+	}
+	
+	public void changeScores(Score[] scores) {
+		this.scores = scores;
+	}
+
+	public void changeGenerations(int generations) {
+		this.generations = generations;
+	}
+
+	public int getMap() {
+		return map;
+	}
+
 
 }

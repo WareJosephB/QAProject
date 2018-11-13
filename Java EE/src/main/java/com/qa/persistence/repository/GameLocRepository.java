@@ -15,12 +15,12 @@ public class GameLocRepository implements GameRepositoriable {
 
 	@Inject
 	private JSONUtil util;
-	
+
 	private static int ID = 1;
-	
+
 	public String getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Game[] theGames = games.entrySet().toArray(new Game[0]);
+		return util.getJSONForObject(theGames);
 	}
 
 	public String add(String game) {
@@ -46,4 +46,18 @@ public class GameLocRepository implements GameRepositoriable {
 		}
 	}
 
+	@Override
+	public String updateGame(int id, String game) {
+		Game game1 = games.get(id);
+		Game game2 = util.getObjectForJSON(game, Game.class);
+		if (game1 != null) {
+			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
+			game1.changeGenerations(game2.returnGenerations());
+			game1.changeScores(game2.returnScores());
+			return "{\"message\": \"Game updated successfully.\"}";
+		} else {
+			return "{\"message\": \"Game not found.\"}";
+		}
+	}
+	
 }

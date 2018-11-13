@@ -19,8 +19,8 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	private static int ID = 1;
 	
 	public String getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Player[] thePlayers = players.entrySet().toArray(new Player[0]);
+		return util.getJSONForObject(thePlayers);
 	}
 
 	public String add(String player) {
@@ -41,6 +41,17 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	public String get(int id) {
 		if (players.get(id) != null) {
 			return util.getJSONForObject(players.get(id));
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
+	}
+
+	@Override
+	public String changeName(int id, String name) {
+		Player player = players.get(id);
+		if (player != null) {
+			player.setName(name);
+			return "{\"message\": \"Player updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}

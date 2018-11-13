@@ -19,8 +19,8 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 	private static int ID = 1;
 	
 	public String getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Score[] theScores = scores.entrySet().toArray(new Score[0]);
+		return util.getJSONForObject(theScores);
 	}
 
 	public String add(String score) {

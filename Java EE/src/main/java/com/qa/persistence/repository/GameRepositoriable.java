@@ -9,5 +9,7 @@ public interface GameRepositoriable {
 	String delete(int id);
 
 	String get(int id);
+	
+	String updateGame(int id, String game);
 
 }
