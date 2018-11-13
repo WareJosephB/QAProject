@@ -26,10 +26,14 @@ class App extends Component {
         event.preventDefault();
         axios.get(playroot+document.getElementById('playId').value)
           .then(function(response) {
-            document.getElementById('output').src = response;
+            document.getElementById('output').src = response.message;
             console.log(response);
             }
         )
+    }
+
+    parsePlayer(JSON){
+
     }
 
     findGame = (event) => {
