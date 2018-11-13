@@ -12,7 +12,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
@@ -28,7 +27,7 @@ public class ScoreDBRepository implements ScoreRepositoriable {
 
 	public String getAll() {
 		Query q = manager.createQuery("Select a FROM Score a");
-		List<Player> scores = q.getResultList();
+		List<Score> scores = q.getResultList();
 		return util.getJSONForObject(scores);
 	}
 

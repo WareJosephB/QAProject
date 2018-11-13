@@ -13,8 +13,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
-import com.qa.persistence.domain.Player;
-import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -29,7 +27,7 @@ public class GameDBRepository implements GameRepositoriable {
 
 	public String getAll() {
 		Query q = manager.createQuery("Select a FROM Game a");
-		List<Player> games = q.getResultList();
+		List<Game> games = q.getResultList();
 		return util.getJSONForObject(games);
 	}
 

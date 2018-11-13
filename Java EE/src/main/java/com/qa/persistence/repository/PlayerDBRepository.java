@@ -13,7 +13,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Player;
-import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)

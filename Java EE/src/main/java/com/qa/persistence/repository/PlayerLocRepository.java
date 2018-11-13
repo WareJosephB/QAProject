@@ -30,13 +30,20 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	}
 
 	public String delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (players.get(id) != null) {
+			players.remove(id);
+			return "{\"message\": \"Player deleted successfully.\"}";
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
 	}
 
 	public String get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (players.get(id) != null) {
+			return util.getJSONForObject(players.get(id));
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
 	}
 
 }
