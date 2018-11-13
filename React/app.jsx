@@ -12,7 +12,19 @@ class App extends Component {
         
     findPlayer = (event) => {
         event.preventDefault();
-        axios.get(playroot+document.getElementById("playId").value)
+        axios.post(playroot + 'add',
+          {
+            name : document.getElementById('newName').value,
+          }).then(function(response) {
+            document.getElementById('output').src = response.message;
+            console.log(response);
+            }
+        )
+    }
+
+    addPlayer = (event) => {
+        event.preventDefault();
+        axios.get(playroot+document.getElementById('playId').value)
           .then(function(response) {
             document.getElementById('output').src = playerParse(response);
             console.log(response);
@@ -22,7 +34,7 @@ class App extends Component {
 
     findGame = (event) => {
         event.preventDefault();
-        axios.get(gameroot+document.getElementById("gameId").value)
+        axios.get(gameroot+document.getElementById('gameId').value)
           .then(function(response) {
             document.getElementById('output').src = gameParse(response);
             console.log(response);
@@ -33,17 +45,30 @@ class App extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.findPlayer}>
-                    <input id="playId" type="number" placeholder="Find Player"/><br/>
-                    <input type="submit" value="Submit" />
-                </form>
-                <form onSubmit={this.findPlayer}>
-                    <input id="gameId" type="number" placeholder="Find Game"/><br/>
-                    <input type="submit" value="Submit" />
-                </form>
+                <div>
+                    <form onSubmit={this.addPlayer}>
+                        <input id='newName' type='text' placeholder='Player Name'/><br/>
+                        <input type='submit' value='Add Player' />
+                    </form>
+                </div>
+                <br/><br/><br/><br/><br/>
+                <div>
+                    <form onSubmit = {this.findPlayer}>
+                        <input id = 'playId' type = 'number' placeholder = 'Player ID Number'/><br/>
+                        <input type = 'submit' value = 'Find Player by ID' />
+                    </form>
 
-                <div id = 'output'></div>
+                    <form onSubmit = {this.findGame}>
+                        <input id = 'gameId' type = 'number' placeholder = 'Game ID Number'/><br/>
+                        <input type = 'submit' value = 'Find Game by ID'/>
+                    </form>
+
+                    <div id = 'output'>
+                    </div>
+
+                </div>
             </div>
+
         )
     }
 }
