@@ -26,7 +26,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	public String add(String player) {
 		Player newPlayer = util.getObjectForJSON(player, Player.class);
 		players.put(ID, newPlayer);
-		return "{\"message\": \"Player added successfully.\"}";
+		return "{\"message\": \"Player added successfully. ID number is "+ID+"\"}";
 	}
 
 	public String delete(Long id) {
@@ -55,6 +55,19 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}
+	}
+
+	@Override
+	public String update(Long id, String entity) {
+		Player player1 = players.get(id);
+		Player player2 = util.getObjectForJSON(entity, Player.class);
+		if (player1 != null) {
+			player1.setName(player2.getName());
+			return "{\"message\": \"Player updated successfully.\"}";
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
+
 	}
 
 }

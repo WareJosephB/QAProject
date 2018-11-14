@@ -94,6 +94,10 @@ public class Game {
 	public int getMap() {
 		return map;
 	}
+	
+	public long getID() {
+		return this.id;
+	}
 
 
 }

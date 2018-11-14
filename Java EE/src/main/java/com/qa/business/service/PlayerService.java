@@ -24,5 +24,9 @@ public class PlayerService implements Servicable {
 	public String get(Long id) {
 		return repo.get(id);
 	}
+	
+	public String update(Long id, String entity) {
+		return repo.update(id, entity);
+	}
 
 }

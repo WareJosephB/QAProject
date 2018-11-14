@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
@@ -34,13 +35,19 @@ public class ScoreDBRepository implements ScoreRepositoriable {
 	@Transactional(REQUIRED)
 	public String add(String score) {
 		Score newScore = util.getObjectForJSON(score, Score.class);
+		String id = "unknown";
 		manager.persist(newScore);
-		return "{\"message\": \"Score added successfully.\"}";
+		Query q = manager.createQuery("SELECT a FROM Score a ORDER BY scoreID DESC");
+		Score latestScore = (Score) q.getResultList().get(0);
+		if (latestScore.equals(newScore)) {
+			id = String.valueOf(latestScore.getID());
+		}
+		return "{\"message\": \"Score added successfully. ID number is " + id + ".\"}";
 	}
 
 	@Transactional(REQUIRED)
 	public String delete(Long id) {
-		if(manager.find(Score.class, id) != null) {
+		if (manager.find(Score.class, id) != null) {
 			manager.remove(id);
 			return "{\"message\": \"Score deleted successfully.\"}";
 		} else {

@@ -11,4 +11,6 @@ public interface PlayerRepositoriable {
 	
 	String changeName(Long id, String name);
 
+	String update(Long id, String entity);
+
 }

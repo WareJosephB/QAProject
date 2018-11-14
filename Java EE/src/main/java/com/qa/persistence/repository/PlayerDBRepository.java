@@ -12,7 +12,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.qa.persistence.domain.Game;
 import com.qa.persistence.domain.Player;
+import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -34,13 +36,19 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 	@Transactional(REQUIRED)
 	public String add(String player) {
 		Player newPlayer = util.getObjectForJSON(player, Player.class);
+		String id = "unknown";
 		manager.persist(newPlayer);
-		return "{\"message\": \"Player added successfully.\"}";
+		Query q = manager.createQuery("SELECT a FROM Player a ORDER BY playID DESC");
+		Player latestPlayer = (Player) q.getResultList().get(0);
+		if (latestPlayer.equals(newPlayer)) {
+			id = String.valueOf(latestPlayer.getID());
+		}
+		return "{\"message\": \"Player added successfully. ID number is " + id + ".\"}";
 	}
 
 	@Transactional(REQUIRED)
 	public String delete(Long id) {
-		if(manager.find(Player.class, id) != null) {
+		if (manager.find(Player.class, id) != null) {
 			manager.remove(manager.find(Player.class, id));
 			return "{\"message\": \"Player deleted successfully.\"}";
 		} else {
@@ -72,4 +80,16 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		}
 	}
 
+	@Override
+	public String update(Long id, String entity) {
+		Player player1 = manager.find(Player.class, id);
+		Player player2 = util.getObjectForJSON(entity, Player.class);
+		if (player1 != null) {
+			player1.setName(player2.getName());
+			return "{\"message\": \"Player updated successfully.\"}";
+		} else {
+			return "{\"message\": \"Player not found.\"}";
+		}
+
+	}
 }

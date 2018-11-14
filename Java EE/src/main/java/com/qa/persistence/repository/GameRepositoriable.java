@@ -9,7 +9,7 @@ public interface GameRepositoriable {
 	String delete(Long id);
 
 	String get(Long id);
-	
-	String updateGame(Long id, String game);
+
+	String update(Long id, String entity);
 
 }

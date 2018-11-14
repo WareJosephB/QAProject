@@ -46,5 +46,9 @@ public class Score {
 	public int getPlace() {
 		return this.place;
 	}
+	
+	public long getID() {
+		return this.id;
+	}
 
 }

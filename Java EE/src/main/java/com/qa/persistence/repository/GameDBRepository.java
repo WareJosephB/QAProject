@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
+import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
@@ -36,8 +37,14 @@ public class GameDBRepository implements GameRepositoriable {
 	@Transactional(REQUIRED)
 	public String add(String game) {
 		Game newGame = util.getObjectForJSON(game, Game.class);
+		String id = "unknown";
 		manager.persist(newGame);
-		return "{\"message\": \"Game added successfully.\"}";
+		Query q = manager.createQuery("SELECT a FROM Game a ORDER BY playID DESC");
+		Game latestGame = (Game) q.getResultList().get(0);
+		if (latestGame.equals(newGame)) {
+			id = String.valueOf(latestGame.getID());
+		}
+		return "{\"message\": \"Game added successfully. ID number is "+id+".\"}";
 	}
 
 	@Transactional(REQUIRED)
@@ -63,9 +70,9 @@ public class GameDBRepository implements GameRepositoriable {
 	}
 
 	@Override
-	public String updateGame(Long id, String game) {
+	public String update(Long id, String entity) {
 		Game game1 = manager.find(Game.class, id);
-		Game game2 = util.getObjectForJSON(game, Game.class);
+		Game game2 = util.getObjectForJSON(entity, Game.class);
 		if (game1 != null) {
 			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
 			game1.changeGenerations(game2.returnGenerations());

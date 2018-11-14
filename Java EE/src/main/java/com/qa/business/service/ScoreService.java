@@ -25,4 +25,7 @@ public class ScoreService implements Servicable {
 		return repo.get(id);
 	}
 
+	public String update(Long id, String entity) {
+		return "{\"message\": \"Scores cannot be edited.\"}";
+	}
 }

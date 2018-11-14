@@ -61,5 +61,9 @@ public class Player {
 	public void setNumberPlayed(int numberPlayed) {
 		this.numberPlayed = numberPlayed;
 	}
+	
+	public long getID() {
+		return this.id;
+	}
 
 }
