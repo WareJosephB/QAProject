@@ -12,7 +12,7 @@ class App extends Component {
         
     findPlayer = (event) => {
         event.preventDefault();
-        axios.post(playroot + 'add',
+        axios.get(playroot + 'add',
           {
             name : document.getElementById('newName').value,
           }).then(function(response) {
@@ -33,7 +33,7 @@ class App extends Component {
     }
 
     parsePlayer(JSON){
-
+       return <table></table>
     }
 
     findGame = (event) => {
