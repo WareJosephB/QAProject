@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Player {
 	
 	public Player() {
-		
+		this.ELO = 1500;
 	}
 
 	private int numberPlayed;
