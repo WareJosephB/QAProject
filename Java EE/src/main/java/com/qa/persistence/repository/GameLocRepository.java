@@ -29,7 +29,7 @@ public class GameLocRepository implements GameRepositoriable {
 		return "{\"message\": \"Game added successfully.\"}";
 	}
 
-	public String delete(int id) {
+	public String delete(Long id) {
 		if (games.get(id) != null) {
 			games.remove(id);
 			return "{\"message\": \"Game deleted successfully.\"}";
@@ -38,7 +38,7 @@ public class GameLocRepository implements GameRepositoriable {
 		}
 	}
 
-	public String get(int id) {
+	public String get(Long id) {
 		if (games.get(id) != null) {
 			return util.getJSONForObject(games.get(id));
 		} else {
@@ -47,7 +47,7 @@ public class GameLocRepository implements GameRepositoriable {
 	}
 
 	@Override
-	public String updateGame(int id, String game) {
+	public String updateGame(Long id, String game) {
 		Game game1 = games.get(id);
 		Game game2 = util.getObjectForJSON(game, Game.class);
 		if (game1 != null) {

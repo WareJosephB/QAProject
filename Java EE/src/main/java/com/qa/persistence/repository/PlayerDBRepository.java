@@ -39,16 +39,17 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 	}
 
 	@Transactional(REQUIRED)
-	public String delete(int id) {
+	public String delete(Long id) {
 		if(manager.find(Player.class, id) != null) {
-			manager.remove(id);
+			manager.remove(manager.find(Player.class, id));
 			return "{\"message\": \"Player deleted successfully.\"}";
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}
 	}
 
-	public String get(int id) {
+	@Override
+	public String get(Long id) {
 		return util.getJSONForObject(manager.find(Player.class, id));
 	}
 
@@ -61,7 +62,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 	}
 
 	@Override
-	public String changeName(int id, String name) {
+	public String changeName(Long id, String name) {
 		Player player = manager.find(Player.class, id);
 		if (player != null) {
 			player.setName(name);

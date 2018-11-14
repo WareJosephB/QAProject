@@ -6,10 +6,10 @@ public interface GameRepositoriable {
 
 	String add(String game);
 
-	String delete(int id);
+	String delete(Long id);
 
-	String get(int id);
+	String get(Long id);
 	
-	String updateGame(int id, String game);
+	String updateGame(Long id, String game);
 
 }

@@ -11,12 +11,12 @@ import com.qa.util.JSONUtil;
 @Alternative
 public class PlayerLocRepository implements PlayerRepositoriable {
 	
-	HashMap<Integer, Player> players = new HashMap<Integer, Player>();
+	HashMap<Long, Player> players = new HashMap<Long, Player>();
 
 	@Inject
 	private JSONUtil util;
 	
-	private static int ID = 1;
+	private static long ID = 1;
 	
 	public String getAll() {
 		Player[] thePlayers = players.entrySet().toArray(new Player[0]);
@@ -29,7 +29,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 		return "{\"message\": \"Player added successfully.\"}";
 	}
 
-	public String delete(int id) {
+	public String delete(Long id) {
 		if (players.get(id) != null) {
 			players.remove(id);
 			return "{\"message\": \"Player deleted successfully.\"}";
@@ -38,7 +38,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 		}
 	}
 
-	public String get(int id) {
+	public String get(Long id) {
 		if (players.get(id) != null) {
 			return util.getJSONForObject(players.get(id));
 		} else {
@@ -47,7 +47,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	}
 
 	@Override
-	public String changeName(int id, String name) {
+	public String changeName(Long id, String name) {
 		Player player = players.get(id);
 		if (player != null) {
 			player.setName(name);

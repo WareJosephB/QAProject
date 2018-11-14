@@ -1,6 +1,7 @@
 package com.qa.rest;
 
 import javax.inject.Inject;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,14 +37,15 @@ public class GameEndpoint implements Pointable {
 	@Path("/delete/{id}")
 	@DELETE
 	@Produces({ "application/json" })
-	public String delete(int id) {
+	public String delete(@PathParam("id") Long id) {
 		return service.delete(id);
 	}
+	
 
 	@Path("/get/{id}")
 	@GET
 	@Produces({ "application/json" })
-	public String get(int id) {
+	public String get(@PathParam("id") Long id) {
 		return service.get(id);
 	}
 

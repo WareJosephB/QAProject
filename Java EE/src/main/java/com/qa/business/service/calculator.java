@@ -61,12 +61,12 @@ public class calculator {
 		double[] ELOs = new double[game.returnNumPlayers()];
 		int i = 0;
 		while (i < game.returnNumPlayers()) {
-			ELOs[i] = updateScore(game.returnScores()[i].getPlayer(), game);
+			ELOs[i] = updateScore(game.returnScores().get(i).getPlayer(), game);
 			i++;
 		}
 		i = 0;
 		while (i < game.returnNumPlayers()) {
-			game.returnScores()[i].getPlayer().updateELO(ELOs[i]);
+			game.returnScores().get(i).getPlayer().updateELO(ELOs[i]);
 			i++;
 		}
 

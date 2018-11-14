@@ -6,8 +6,8 @@ public interface ScoreRepositoriable {
 
 	String add(String score);
 
-	String delete(int id);
+	String delete(Long id);
 
-	String get(int id);
+	String get(Long id);
 
 }

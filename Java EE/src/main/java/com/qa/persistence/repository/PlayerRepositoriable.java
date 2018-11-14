@@ -5,10 +5,10 @@ public interface PlayerRepositoriable {
 
 	String add(String player);
 
-	String delete(int id);
+	String delete(Long id);
 
-	String get(int id);
+	String get(Long id);
 	
-	String changeName(int id, String name);
+	String changeName(Long id, String name);
 
 }

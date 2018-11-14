@@ -1,18 +1,30 @@
 package com.qa.persistence.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 @Entity
 public class Game {
 
-	public Game(Score[] scores) {
+	public Game() {
+		
+	}
+	
+	public Game(List<Score> scores) {
 		this.scores = scores;
 	}
 	
-	public Game(int map, boolean P, boolean C, boolean V, int generations, Score[] scores) {
+	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores) {
 		this.scores = scores;
 		this.map = map;
 		this.P = P;
@@ -24,13 +36,17 @@ public class Game {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "gameid")
+	private long id;
 
 	private boolean P;
 	private boolean C;
 	private boolean V;
 	private int generations;
-	private Score[] scores;
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@ElementCollection(targetClass=Score.class)
+	@OrderColumn
+	private List<Score> scores;
 	private int map;
 
 	public boolean returnP() {
@@ -49,12 +65,12 @@ public class Game {
 		return this.generations;
 	}
 
-	public Score[] returnScores() {
+	public List<Score> returnScores() {
 		return this.scores;
 	}
 
 	public int returnNumPlayers() {
-		return this.scores.length;
+		return this.scores.size();
 	}
 
 	public void changeAddons(boolean P, boolean C, boolean V) {
@@ -67,7 +83,7 @@ public class Game {
 		this.map = map;
 	}
 	
-	public void changeScores(Score[] scores) {
+	public void changeScores(List<Score> scores) {
 		this.scores = scores;
 	}
 

@@ -3,6 +3,7 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -13,6 +14,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
+import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -39,7 +41,7 @@ public class GameDBRepository implements GameRepositoriable {
 	}
 
 	@Transactional(REQUIRED)
-	public String delete(int id) {
+	public String delete(Long id) {
 		if(manager.find(Game.class, id) != null) {
 			manager.remove(id);
 			return "{\"message\": \"Game deleted successfully.\"}";
@@ -48,7 +50,7 @@ public class GameDBRepository implements GameRepositoriable {
 		}
 	}
 
-	public String get(int id) {
+	public String get(Long id) {
 		return util.getJSONForObject(manager.find(Game.class, id));
 	}
 
@@ -61,7 +63,7 @@ public class GameDBRepository implements GameRepositoriable {
 	}
 
 	@Override
-	public String updateGame(int id, String game) {
+	public String updateGame(Long id, String game) {
 		Game game1 = manager.find(Game.class, id);
 		Game game2 = util.getObjectForJSON(game, Game.class);
 		if (game1 != null) {

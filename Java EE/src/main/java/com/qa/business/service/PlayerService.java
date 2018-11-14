@@ -17,12 +17,12 @@ public class PlayerService implements Servicable {
 		return repo.add(player);
 	}
 
-	public String delete(int id) {
+	public String delete(Long id) {
 		return repo.delete(id);
 	}
 
-	public String get(int id) {
-		return repo.delete(id);
+	public String get(Long id) {
+		return repo.get(id);
 	}
 
 }

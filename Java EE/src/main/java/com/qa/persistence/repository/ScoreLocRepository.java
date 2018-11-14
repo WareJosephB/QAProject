@@ -11,12 +11,12 @@ import com.qa.util.JSONUtil;
 @Alternative
 public class ScoreLocRepository implements ScoreRepositoriable {
 
-	HashMap<Integer, Score> scores = new HashMap<Integer, Score>();
+	HashMap<Long, Score> scores = new HashMap<Long, Score>();
 
 	@Inject
 	private JSONUtil util;
 	
-	private static int ID = 1;
+	private static long ID = 1;
 	
 	public String getAll() {
 		Score[] theScores = scores.entrySet().toArray(new Score[0]);
@@ -29,7 +29,7 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 		return "{\"message\": \"Score added successfully.\"}";
 	}
 
-	public String delete(int id) {
+	public String delete(Long id) {
 		if (scores.get(id) != null) {
 			scores.remove(id);
 			return "{\"message\": \"Score deleted successfully.\"}";
@@ -38,7 +38,7 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 		}
 	}
 
-	public String get(int id) {
+	public String get(Long id) {
 		if (scores.get(id) != null) {
 			return util.getJSONForObject(scores.get(id));
 		} else {

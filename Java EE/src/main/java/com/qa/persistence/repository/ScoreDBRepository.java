@@ -39,7 +39,7 @@ public class ScoreDBRepository implements ScoreRepositoriable {
 	}
 
 	@Transactional(REQUIRED)
-	public String delete(int id) {
+	public String delete(Long id) {
 		if(manager.find(Score.class, id) != null) {
 			manager.remove(id);
 			return "{\"message\": \"Score deleted successfully.\"}";
@@ -48,7 +48,7 @@ public class ScoreDBRepository implements ScoreRepositoriable {
 		}
 	}
 
-	public String get(int id) {
+	public String get(Long id) {
 		return util.getJSONForObject(manager.find(Score.class, id));
 	}
 
