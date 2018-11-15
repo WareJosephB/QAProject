@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import {getAll, deletePlayer} from './playerFunctions.jsx'
 
-
-
 export default class topTable extends Component {
     
     componentWillMount(){
@@ -21,7 +19,6 @@ export default class topTable extends Component {
         )
      }
 
-
     render() {
       return (  
             <div id='output'>
@@ -33,6 +30,6 @@ export default class topTable extends Component {
                     <TableHeaderColumn dataField='button' dataFormat={this.cellButton}/>
                 </BootstrapTable>
             </div>
-      );
+        );
     }
-  }
+}

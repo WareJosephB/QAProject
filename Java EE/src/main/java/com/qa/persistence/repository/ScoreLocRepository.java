@@ -18,17 +18,20 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 	
 	private static long ID = 1;
 	
+	@Override
 	public String getAll() {
 		Score[] theScores = scores.entrySet().toArray(new Score[0]);
 		return util.getJSONForObject(theScores);
 	}
 
+	@Override
 	public String add(String score) {
 		Score newScore = util.getObjectForJSON(score, Score.class);
 		scores.put(ID, newScore);
 		return "{\"message\": \"Score added successfully. ID number is "+ID+"\"}";
 	}
 
+	@Override
 	public String delete(Long id) {
 		if (scores.get(id) != null) {
 			scores.remove(id);
@@ -38,6 +41,7 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 		}
 	}
 
+	@Override
 	public String get(Long id) {
 		if (scores.get(id) != null) {
 			return util.getJSONForObject(scores.get(id));

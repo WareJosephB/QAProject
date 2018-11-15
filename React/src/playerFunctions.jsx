@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import TopTable from './topTable.jsx';
-import TablePlayer from './tablePlayer.jsx';
 
 const url = 'http://localhost:';
 const port = '8080';
@@ -21,18 +20,18 @@ export const addPlayer = (event) => {
         axios.post(base+add, {
             name : document.getElementById('newName').value
         }).then(response => {
-            document.getElementById('confirm').innerHTML = response.data.message;
+            document.getElementById('confirmAP').innerHTML = response.data.message;
         }).catch(function (error) {
             console.log(error)
         })
     window.location.reload();
     }
 
-
 export const getPlayer = (event) => {
     event.preventDefault();
+    document.getElementById('updatePlayerForm').innerHTML+="<input id = 'updateName' type = 'text'/><input type = 'submit' value = 'Confirm Update'/><p id = 'confirmUP'></p>";
     axios.get(base+get+document.getElementById('playId').value).then(response => {
-        render(<TablePlayer data={response.data}/>, document.getElementById('output'));
+        document.getElementById('updatedName').placeholder=(response.data.name);
         }).catch(function (error) {
             console.log(error)
         })
@@ -52,5 +51,17 @@ export const deletePlayer = (event) => {
         }).catch(function (error) {
             console.log(error)
         })
+    window.location.reload();
+    }
+
+export const updatePlayer = (event) => {
+    event.preventDefault();
+    axios.post(base+up+document.getElementById('playId').value, {
+        name : document.getElementById('updateName').value
+    }).then(response => {
+        document.getElementById('confirmUP').innerHTML = response.data.message;
+    }).catch(function (error) {
+        console.log(error)
+    })
     window.location.reload();
     }

@@ -21,6 +21,7 @@ public class PlayerEndpoint implements Pointable {
 		this.service = service;
 	}
 
+	@Override
 	@Path("/getAll")
 	@GET
 	@Produces({ "application/json" })
@@ -28,6 +29,7 @@ public class PlayerEndpoint implements Pointable {
 		return service.getAll();
 	}
 
+	@Override
 	@Path("/add")
 	@POST
 	@Produces({ "application/json" })
@@ -35,6 +37,7 @@ public class PlayerEndpoint implements Pointable {
 		return service.add(player);
 	}
 
+	@Override
 	@Path("/delete/{id}")
 	@DELETE
 	@Produces({ "application/json" })
@@ -43,6 +46,7 @@ public class PlayerEndpoint implements Pointable {
 	}
 	
 	
+	@Override
 	@Path("/get/{id}")
 	@GET
 	@Produces({ "application/json" })
@@ -50,6 +54,7 @@ public class PlayerEndpoint implements Pointable {
 		return service.get(id);
 	}
 	
+	@Override
 	@Path("/update/{id}")
 	@PUT
 	@Produces({"application/json"})

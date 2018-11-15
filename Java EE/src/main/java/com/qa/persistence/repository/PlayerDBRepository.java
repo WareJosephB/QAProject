@@ -12,9 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.qa.persistence.domain.Game;
 import com.qa.persistence.domain.Player;
-import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -27,12 +25,14 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 	@Inject
 	private JSONUtil util;
 
+	@Override
 	public String getAll() {
 		Query q = manager.createQuery("Select a FROM Player a");
 		List<Player> players = q.getResultList();
 		return util.getJSONForObject(players);
 	}
 
+	@Override
 	@Transactional(REQUIRED)
 	public String add(String player) {
 		Player newPlayer = util.getObjectForJSON(player, Player.class);
@@ -46,6 +46,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		return "{\"message\": \"Player added successfully. ID number is " + id + ".\"}";
 	}
 
+	@Override
 	@Transactional(REQUIRED)
 	public String delete(Long id) {
 		if (manager.find(Player.class, id) != null) {

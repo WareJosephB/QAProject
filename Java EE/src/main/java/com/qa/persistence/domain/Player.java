@@ -48,6 +48,7 @@ public class Player {
 		this.ELO += ELO;
 	}
 
+	@Override
 	public String toString() {
 		DecimalFormat form = new DecimalFormat("#.00");
 		form.setRoundingMode(RoundingMode.DOWN);

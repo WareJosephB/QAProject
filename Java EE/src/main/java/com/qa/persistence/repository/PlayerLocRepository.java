@@ -18,17 +18,20 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	
 	private static long ID = 1;
 	
+	@Override
 	public String getAll() {
 		Player[] thePlayers = players.entrySet().toArray(new Player[0]);
 		return util.getJSONForObject(thePlayers);
 	}
 
+	@Override
 	public String add(String player) {
 		Player newPlayer = util.getObjectForJSON(player, Player.class);
 		players.put(ID, newPlayer);
 		return "{\"message\": \"Player added successfully. ID number is "+ID+"\"}";
 	}
 
+	@Override
 	public String delete(Long id) {
 		if (players.get(id) != null) {
 			players.remove(id);
@@ -38,6 +41,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 		}
 	}
 
+	@Override
 	public String get(Long id) {
 		if (players.get(id) != null) {
 			return util.getJSONForObject(players.get(id));

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Player from './Player.jsx';
-import Game from './Game.jsx';
+import Player from './player.jsx';
+import Game from './game.jsx';
 import TopTable from './topTable.jsx';
 
 export default class App extends Component {

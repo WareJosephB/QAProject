@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import {deletePlayer} from './playerFunctions';
 
-
-
-
 export default class playersTable extends Component {
     
     cellButton(cell, row) {
@@ -15,7 +12,6 @@ export default class playersTable extends Component {
            </button>
         )
      }
-
 
     render() {
     

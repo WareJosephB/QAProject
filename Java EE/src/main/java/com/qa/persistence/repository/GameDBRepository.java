@@ -3,7 +3,6 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -14,8 +13,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
-import com.qa.persistence.domain.Player;
-import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -28,12 +25,14 @@ public class GameDBRepository implements GameRepositoriable {
 	@Inject
 	private JSONUtil util;
 
+	@Override
 	public String getAll() {
 		Query q = manager.createQuery("Select a FROM Game a");
 		List<Game> games = q.getResultList();
 		return util.getJSONForObject(games);
 	}
 
+	@Override
 	@Transactional(REQUIRED)
 	public String add(String game) {
 		Game newGame = util.getObjectForJSON(game, Game.class);
@@ -47,6 +46,7 @@ public class GameDBRepository implements GameRepositoriable {
 		return "{\"message\": \"Game added successfully. ID number is "+id+".\"}";
 	}
 
+	@Override
 	@Transactional(REQUIRED)
 	public String delete(Long id) {
 		if(manager.find(Game.class, id) != null) {
@@ -57,6 +57,7 @@ public class GameDBRepository implements GameRepositoriable {
 		}
 	}
 
+	@Override
 	public String get(Long id) {
 		return "["+util.getJSONForObject(manager.find(Game.class, id))+"]";
 	}

@@ -22,7 +22,6 @@ public class calculator {
 		return weighting * (result - expected);
 	}
 
-
 	private static double updateAverageChangeWeighted(Player player, Game game) { // Finds change for "average ELO
 																					// change
 																					// method", weighted
@@ -55,8 +54,6 @@ public class calculator {
 
 	}
 
-
-
 	public static void UpdateAfterGame(Game game) {
 		double[] ELOs = new double[game.returnNumPlayers()];
 		int i = 0;
@@ -72,8 +69,8 @@ public class calculator {
 
 	}
 
-	private static double updateScore(Player player, Game game) { 
-		player.setNumberPlayed(player.getNumberPlayed()+1);
+	private static double updateScore(Player player, Game game) {
+		player.setNumberPlayed(player.getNumberPlayed() + 1);
 		return updateAverageChangeWeighted(player, game);
 
 	}

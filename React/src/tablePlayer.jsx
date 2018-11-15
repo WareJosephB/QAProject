@@ -18,7 +18,7 @@ export default class tablePlayer extends Component {
   const data = this.props.data;
   return(
     <div>
-    <ReactTable data={data} columns={columns}/>
+      <ReactTable data={data} columns={columns}/>
     </div>
   )
   }
