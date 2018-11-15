@@ -58,7 +58,7 @@ public class GameDBRepository implements GameRepositoriable {
 	}
 
 	public String get(Long id) {
-		return util.getJSONForObject(manager.find(Game.class, id));
+		return "["+util.getJSONForObject(manager.find(Game.class, id))+"]";
 	}
 
 	public void setManager(EntityManager manager) {

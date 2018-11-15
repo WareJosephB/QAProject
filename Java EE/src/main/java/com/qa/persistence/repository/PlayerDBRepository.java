@@ -58,7 +58,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 
 	@Override
 	public String get(Long id) {
-		return util.getJSONForObject(manager.find(Player.class, id));
+		return "["+util.getJSONForObject(manager.find(Player.class, id))+"]";
 	}
 
 	public void setManager(EntityManager manager) {
