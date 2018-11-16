@@ -12,7 +12,7 @@ export function getColonies(event){
     axios.get(base+colonies).then(response => {return(response.data)}).catch(function (error) {console.log(error)});
 }
 
-export class colonyRow extends Component{
+export class ColonyRows extends Component{
 
     render(){
         return(

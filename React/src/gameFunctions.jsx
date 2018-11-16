@@ -1,4 +1,6 @@
 import axios from 'axios';
+import React from 'react';
+import Fields from './fields.jsx';
 
 const url = 'http://localhost:';
 const port = '8080';
@@ -20,8 +22,8 @@ export const generateFields = () => {
 getScores = () => {
     var scores = "[";
     var numPlayers = document.getElementById('numPlayers');
-    for (var i = 1; i<=numPlayers;i++){
-        if (i != 1){
+    for (var place = 1; place <= numPlayers; place++){
+        if (place != 1){
             scores += ", ";
         }
         scores+= "{ player:" + document.getElementById('player'+place+'name').value + ", score:"+document.getElementById('player'+place+'score').value +"}";
