@@ -1,3 +1,6 @@
+import Axios from 'axios';
+import React, {Component} from 'react';
+
 const url = 'http://localhost:';
 const port = '8080';
 const rest = '/MultiplayerELO/access/expansion/';
@@ -9,15 +12,15 @@ const preludes = 'getPreludes/';
 
 export function getColonies(event){
     event.preventDefault();
-    axios.get(base+colonies).then(response => {return(response.data)}).catch(function (error) {console.log(error)});
+    Axios.get(base+colonies).then(response => {return(response.data)}).catch(function (error) {console.log(error)});
 }
 
-export class colonyRow extends Component{
+export class ColonyRow extends Component{
 
     render(){
         return(
             
-        
+            <div>hahabutts</div>
         
         )
     }

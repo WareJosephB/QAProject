@@ -29,7 +29,7 @@ export const addPlayer = (event) => {
 
 export const getPlayer = (event) => {
     event.preventDefault();
-    document.getElementById('updatePlayerForm').innerHTML+="<input id = 'updateName' type = 'text'/><input type = 'submit' value = 'Confirm Update'/><p id = 'confirmUP'></p>";
+    document.getElementById('placeholder').innerHTML = "<input className=\"quarter\" id = 'updateName' type = 'text'/><input className=\"quarter\" type = 'submit' value = 'Confirm Update'/><br/><p id = 'confirmUP'></p>";
     axios.get(base+get+document.getElementById('playId').value).then(response => {
         document.getElementById('updatedName').placeholder=(response.data.name);
         }).catch(function (error) {

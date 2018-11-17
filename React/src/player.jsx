@@ -6,19 +6,19 @@ export default class Player extends Component {
     render(){
         return(
             <div>
-                <div>
+                <div className="APF">
                     <form id='addPlayerForm' onSubmit={addPlayer}>
-                        <input id='newName' type='text' placeholder='Player Name'/>
-                        <input type='submit' value='Add Player' />
+                        <input className="half" id='newName' type='text' placeholder='Player Name'/>
+                        <input className="half" type='submit' value='Add Player' />
                         <p id = 'confirmAP'></p>
                     </form>
                 </div>
-                <div>
+                <div className="UPF">
                     <form id='updatePlayerForm' onSubmit = {updatePlayer}>
-                        <input id = 'playId' type = 'number' placeholder = 'Player ID Number'/>
-                        <input type = 'button' value = 'Update Player' onClick={getPlayer}/>
+                        <input className="quarter" id = 'playId' type = 'number' placeholder = 'Player ID Number'/>
+                        <input className="quarter" type = 'button' value = 'Update Player' onClick={getPlayer}/>
+                        <div id="placeholder"><br/><br/></div>
                     </form>
-                    <br/>
                 </div>
             </div>
         );

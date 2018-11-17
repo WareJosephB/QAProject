@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ColonyRow, getColonies} from './expansions.jsx';
 
-export default class colonies extends Component{
+export default class Colonies extends Component{
     constructor(props){
         super(props);
         this.state({
@@ -11,12 +11,12 @@ export default class colonies extends Component{
     }
 
     render(){
-        colonyRows = "";
-        if (this.state.colonies != 0){
+        var colonyRows = "";
+        if (this.state.colonies !== 0){
             const colonies = getColonies();
             for (var i = 0; i < this.props.players+1; i++){
                 colonyRows += <ColonyRow number={i} colonies={colonies}/>
-                if (i == 3){
+                if (i === 3){
                     colonyRows += "<br/>";
                 }
             }
