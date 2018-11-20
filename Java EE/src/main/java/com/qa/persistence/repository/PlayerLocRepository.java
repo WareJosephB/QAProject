@@ -1,23 +1,33 @@
 package com.qa.persistence.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import com.qa.persistence.domain.Player;
+import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Alternative
 public class PlayerLocRepository implements PlayerRepositoriable {
-	
-	HashMap<Long, Player> players = new HashMap<Long, Player>();
+
+	private static HashMap<Long, Player> players = new HashMap<Long, Player>();
 
 	@Inject
 	private JSONUtil util;
-	
+
 	private static long ID = 1;
-	
+
+	public static ArrayList<Player> getPlayers(ArrayList<Score> scores) {
+		ArrayList<Player> gamePlayers = new ArrayList<Player>();
+		for (Score score : scores) {
+			gamePlayers.add(players.get(score.getPlayerID()));
+		}
+		return gamePlayers;
+	}
+
 	@Override
 	public String getAll() {
 		Player[] thePlayers = players.entrySet().toArray(new Player[0]);
@@ -28,7 +38,7 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	public String add(String player) {
 		Player newPlayer = util.getObjectForJSON(player, Player.class);
 		players.put(ID, newPlayer);
-		return "{\"message\": \"Player added successfully. ID number is "+ID+"\"}";
+		return "{\"message\": \"Player added successfully. ID number is " + ID + "\"}";
 	}
 
 	@Override
@@ -48,6 +58,10 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}
+	}
+
+	public static Player getPlayer(Long id) {
+		return players.get(id);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.qa.persistence.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,17 +23,14 @@ public class Game {
 
 	}
 
-	public Game(List<Score> scores) {
-		this.scores = scores;
-	}
-
-	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores) {
+	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores, Collection<Colony> colonies) {
 		this.scores = scores;
 		this.map = map;
 		this.P = P;
 		this.C = C;
 		this.V = V;
 		this.generations = generations;
+		this.colonies = colonies;
 
 	}
 
@@ -39,20 +38,19 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gameid")
 	private long id;
-
+	private int map;
 	private boolean P;
 	private boolean C;
 	private boolean V;
 	private int generations;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@ElementCollection(targetClass = Score.class)
 	@OrderColumn
-	private List<Score> scores;
-	private int map;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Collection<Score> scores;
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@ElementCollection(targetClass = Colony.class)
 	@OrderColumn
-	private List<Colony> colonies;
+	private Collection<Colony> colonies;
 
 	public boolean returnP() {
 		return this.P;
@@ -71,7 +69,7 @@ public class Game {
 	}
 
 	public List<Score> returnScores() {
-		return this.scores;
+		return (ArrayList<Score>) this.scores;
 	}
 
 	public int returnNumPlayers() {
@@ -88,8 +86,8 @@ public class Game {
 		this.map = map;
 	}
 
-	public void changeScores(List<Score> scores) {
-		this.scores = scores;
+	public void changeScores(Collection<Score> collection) {
+		this.scores = collection;
 	}
 
 	public void changeGenerations(int generations) {

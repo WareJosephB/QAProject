@@ -1,0 +1,46 @@
+body.page{
+    background-color : #B84B34;
+}
+
+div.CC{
+    width : 80%;
+    margin : auto;
+}
+
+div.APF{
+    width : 33%;
+    float : left;
+    margin-left : 0;
+}
+
+div.UPF{
+    width : 67%;
+    float : right;
+    margin-right : 0;
+}
+
+table.topTable{
+    text-align: center;
+}
+
+button.leftButton{
+    float : left;
+    margin-left : 0;
+}
+
+button.rightButton{
+    float : right;
+    margin-right : 0;
+}
+
+div.game{
+    clear : both;
+}
+ 
+ input.half{
+    width : 50%;
+}
+
+ .quarter{
+    width : 25%;
+}

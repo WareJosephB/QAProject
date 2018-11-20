@@ -23,6 +23,13 @@
       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd" bean-discovery-mode="all">
       
       <!-- <alternatives>
-        <class>com.qa.service.repository.AccountMapRepository</class>
-    </alternatives> -->
+        		<class>com.qa.persistence.repository.GameLocRepository</class>
+        		<class>com.qa.persistence.repository.AwardsLocRepository</class>
+                <class>com.qa.persistence.repository.ScoreLocRepository</class>
+                <class>com.qa.persistence.repository.PlayerLocRepository</class>
+                <class>com.qa.persistence.repository.PreludeLocRepository</class>
+                <class>com.qa.persistence.repository.ColonyLocRepository</class>
+				<class>com.qa.business.service.Calculocal</class>
+				
+    </alternatives> --> <!--  uncomment the above for local-only use -->
 </beans>

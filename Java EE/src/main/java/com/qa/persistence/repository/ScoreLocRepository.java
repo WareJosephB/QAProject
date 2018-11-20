@@ -15,9 +15,9 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 
 	@Inject
 	private JSONUtil util;
-	
+
 	private static long ID = 1;
-	
+
 	@Override
 	public String getAll() {
 		Score[] theScores = scores.entrySet().toArray(new Score[0]);
@@ -28,7 +28,7 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 	public String add(String score) {
 		Score newScore = util.getObjectForJSON(score, Score.class);
 		scores.put(ID, newScore);
-		return "{\"message\": \"Score added successfully. ID number is "+ID+"\"}";
+		return "{\"message\": \"Score added successfully. ID number is " + ID + "\"}";
 	}
 
 	@Override

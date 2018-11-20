@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OrderColumn;
 
 @Entity
 public class Score {
@@ -26,25 +24,69 @@ public class Score {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "scoreid")
 	private long id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "playerid")
 	private Player player;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@ElementCollection(targetClass = Prelude.class)
-	@OrderColumn
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "preludeid")
 	private List<Prelude> preludes;
 	private int score;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@ElementCollection(targetClass = Colony.class)
-	@OrderColumn
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "colonyid")
 	private List<Colony> colonies;
+	private int place;
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "corpid")
+	private Corporation corporation;
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "awardid")
+	private List<Awards> awardsWon;
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "awardid")
+	private List<Awards> awardsSecond;
 
-	public double getELO() {
-		return this.player.getELO();
+	public List<Awards> getAwardsWon() {
+		return awardsWon;
 	}
 
-	public Player getPlayer() {
-		return this.player;
+	public void setAwardsWon(List<Awards> awardsWon) {
+		this.awardsWon = awardsWon;
+	}
+
+	public List<Awards> getAwardsSecond() {
+		return awardsSecond;
+	}
+
+	public void setAwardsSecond(List<Awards> awardsSecond) {
+		this.awardsSecond = awardsSecond;
+	}
+
+	public List<Prelude> getPreludes() {
+		return preludes;
+	}
+
+	public void setPreludes(List<Prelude> preludes) {
+		this.preludes = preludes;
+	}
+
+	public List<Colony> getColonies() {
+		return colonies;
+	}
+
+	public void setColonies(List<Colony> colonies) {
+		this.colonies = colonies;
+	}
+
+	public long getId() {
+		return this.id;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	public int getScore() {
@@ -52,12 +94,33 @@ public class Score {
 	}
 
 	public Score(int place, Player player, int score) {
+		this.place = place;
 		this.player = player;
 		this.score = score;
 	}
 
 	public long getID() {
 		return this.id;
+	}
+
+	public long getPlayerID() {
+		return this.player.getID();
+	}
+
+	public int getPlace() {
+		return place;
+	}
+
+	public void setPlace(int place) {
+		this.place = place;
+	}
+
+	public Corporation getCorporation() {
+		return corporation;
+	}
+
+	public void setCorporation(Corporation corporation) {
+		this.corporation = corporation;
 	}
 
 }

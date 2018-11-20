@@ -1,4 +1,5 @@
-import axios from 'axios';
+
+import Axios from 'axios';
 import React from 'react';
 import Fields from './fields.jsx';
 
@@ -14,27 +15,40 @@ export const All = 'getAll/';
 export const up = 'update/';
 export const del = 'delete/';
 
-export const generateFields = () => {
-    document.getElementById("NG").innerHTML+= <Fields />;
-    document.getElementById("NG").innerHTML+= <input type="submit">Add Game and Update ELO</input>;
-}
+// export const generateFields = () => {
+//     document.getElementById("NG").innerHTML+= <Fields />;
+//     document.getElementById("NG").innerHTML+= <input type="submit">Add Game and Update ELO</input>;
+// }
 
-getScores = () => {
-    var scores = "[";
-    var numPlayers = document.getElementById('numPlayers');
-    for (var place = 1; place <= numPlayers; place++){
-        if (place != 1){
-            scores += ", ";
-        }
-        scores+= "{ player:" + document.getElementById('player'+place+'name').value + ", score:"+document.getElementById('player'+place+'score').value +"}";
-    }
-    scores += "]";
-    return scores;
-}
+// getScores = () => {
+//     var scores = "[";
+//     var numPlayers = document.getElementById('numPlayers');
+//     for (var place = 1; place <= numPlayers; place++){
+//         if (place != 1){
+//             scores += ", ";
+//         }
+//         scores+= "{ player:" + document.getElementById('player'+place+'name').value + ", score:"+document.getElementById('player'+place+'score').value +"}";
+//     }
+//     scores += "]";
+//     return scores;
+// }
+
+// this.getScores = () => {
+//     var scores = "[";
+//     var numPlayers = document.getElementById('numPlayers').value;
+//     for (var place = 1; place<=numPlayers; place++){
+//         if (place !== 1){
+//             scores += ", ";
+//         }
+//         scores+= "{ player:" + document.getElementById('player'+place+'name').value + ", score:"+document.getElementById('player'+place+'score').value +"}";
+//     }
+//     scores += "]";
+//     return scores;
+// }
 
 export const addGame = (event) => {
         event.preventDefault();
-        axios.post(base+add, {
+        Axios.post(base+add, {
             map : document.getElementById('NGmap'),
             P: document.getElementById('NGP'),
             C: document.getElementById('NGC'),
@@ -49,7 +63,7 @@ export const addGame = (event) => {
 
 export const getGame = (event) => {
     event.preventDefault();
-    axios.get(base+get+document.getElementById('gameId').value).then(function(response) {
+    Axios.get(base+get+document.getElementById('gameId').value).then(function(response) {
         document.getElementById('output').innerHTML = response;
     });
 }

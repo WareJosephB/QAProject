@@ -9,6 +9,8 @@ import com.qa.util.JSONUtil;
 public class GameService implements Servicable {
 
 	@Inject
+	private Calculable calc;
+	@Inject
 	private GameRepositoriable repo;
 
 	@Inject
@@ -16,18 +18,20 @@ public class GameService implements Servicable {
 
 	@Override
 	public String getAll() {
-		return repo.getAll();
+		return "";
+		// return repo.getAll();
 	}
 
 	@Override
 	public String add(String game) {
-		calculator.UpdateAfterGame(util.getObjectForJSON(game, Game.class));
+		calc.UpdateAfterGame(util.getObjectForJSON(game, Game.class));
 		return repo.add(game);
 	}
 
 	@Override
 	public String delete(Long id) {
-		return repo.delete(id);
+		return "";
+		// return repo.delete(id);
 	}
 
 	@Override

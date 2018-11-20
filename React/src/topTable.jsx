@@ -3,17 +3,20 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import {getAll, deletePlayer} from './playerFunctions.jsx'
 
 export default class topTable extends Component {
-    
-    componentWillMount(){
-        getAll();
-        this.setState({defaultSortName: 'id',
-        defaultSortOrder: 'desc'});
+    constructor(props){
+        super(props);
+        this.state={
+            players : getAll(),
+            options :{
+            defaultSortName: 'ELO',
+            defaultSortOrder : 'desc'
+            }
+        }
     }
 
     cellButton(cell, row) {
-        console.log(row);
         return (
-           <button type="button" onClick={() => deletePlayer(row.id)}>
+           <button type="button" onClick={() => {deletePlayer(row.id); this.setState.players = getAll()}}>
            Delete Player
            </button>
         )
@@ -22,11 +25,11 @@ export default class topTable extends Component {
     render() {
       return (  
             <div id='output'>
-                <BootstrapTable data={this.props.data} options={this.state.options}>
-                    <TableHeaderColumn dataField='id' isKey dataSort="true">Player ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name' dataSort="true">Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='ELO' dataSort="true">ELO</TableHeaderColumn>
-                    <TableHeaderColumn dataField='numberPlayed' dataSort>Games Played</TableHeaderColumn>
+                <BootstrapTable data={this.props.data} options={this.state.options} className="topTable">
+                    <TableHeaderColumn dataField='id' isKey>Player ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name' dataSort={true}>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField='ELO' dataSort={true}>ELO</TableHeaderColumn>
+                    <TableHeaderColumn dataField='numberPlayed' dataSort={true}>Games Played</TableHeaderColumn>
                     <TableHeaderColumn dataField='button' dataFormat={this.cellButton}/>
                 </BootstrapTable>
             </div>

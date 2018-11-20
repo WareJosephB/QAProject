@@ -1,22 +1,24 @@
 package com.qa.persistence.repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import com.qa.persistence.domain.Game;
+import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Alternative
 public class GameLocRepository implements GameRepositoriable {
 
-	HashMap<Integer, Game> games = new HashMap<Integer, Game>();
+	HashMap<Long, Game> games = new HashMap<Long, Game>();
 
 	@Inject
 	private JSONUtil util;
 
-	private static int ID = 1;
+	private static long ID = 1;
 
 	@Override
 	public String getAll() {
@@ -28,7 +30,7 @@ public class GameLocRepository implements GameRepositoriable {
 	public String add(String game) {
 		Game newGame = util.getObjectForJSON(game, Game.class);
 		games.put(ID, newGame);
-		return "{\"message\": \"Game added successfully. ID number is "+ID+"\"}";
+		return "{\"message\": \"Game added successfully. ID number is " + ID + "\"}";
 	}
 
 	@Override
@@ -57,11 +59,11 @@ public class GameLocRepository implements GameRepositoriable {
 		if (game1 != null) {
 			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
 			game1.changeGenerations(game2.returnGenerations());
-			game1.changeScores(game2.returnScores());
+			game1.changeScores((Collection<Score>) game2.returnScores());
 			return "{\"message\": \"Game updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Game not found.\"}";
 		}
 	}
-	
+
 }

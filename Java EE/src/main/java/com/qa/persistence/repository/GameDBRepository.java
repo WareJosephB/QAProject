@@ -3,6 +3,7 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -13,6 +14,8 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
+import com.qa.persistence.domain.Player;
+import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -37,19 +40,19 @@ public class GameDBRepository implements GameRepositoriable {
 	public String add(String game) {
 		Game newGame = util.getObjectForJSON(game, Game.class);
 		String id = "unknown";
-		manager.persist(newGame);
+		manager.merge(newGame);
 		Query q = manager.createQuery("SELECT a FROM Game a ORDER BY playID DESC");
 		Game latestGame = (Game) q.getResultList().get(0);
 		if (latestGame.equals(newGame)) {
 			id = String.valueOf(latestGame.getID());
 		}
-		return "{\"message\": \"Game added successfully. ID number is "+id+".\"}";
+		return "{\"message\": \"Game added successfully. ID number is " + id + ".\"}";
 	}
 
 	@Override
 	@Transactional(REQUIRED)
 	public String delete(Long id) {
-		if(manager.find(Game.class, id) != null) {
+		if (manager.find(Game.class, id) != null) {
 			manager.remove(id);
 			return "{\"message\": \"Game deleted successfully.\"}";
 		} else {
@@ -59,7 +62,7 @@ public class GameDBRepository implements GameRepositoriable {
 
 	@Override
 	public String get(Long id) {
-		return "["+util.getJSONForObject(manager.find(Game.class, id))+"]";
+		return "[" + util.getJSONForObject(manager.find(Game.class, id)) + "]";
 	}
 
 	public void setManager(EntityManager manager) {
@@ -70,6 +73,7 @@ public class GameDBRepository implements GameRepositoriable {
 		this.util = util;
 	}
 
+	@Transactional(REQUIRED)
 	@Override
 	public String update(Long id, String entity) {
 		Game game1 = manager.find(Game.class, id);
@@ -77,7 +81,7 @@ public class GameDBRepository implements GameRepositoriable {
 		if (game1 != null) {
 			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
 			game1.changeGenerations(game2.returnGenerations());
-			game1.changeScores(game2.returnScores());
+			game1.changeScores((Collection<Score>) game2.returnScores());
 			return "{\"message\": \"Game updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Game not found.\"}";

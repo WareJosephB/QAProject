@@ -1,23 +1,23 @@
 package com.qa.rest;
 
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.qa.business.service.PlayerService;
+import com.qa.business.service.PreludeService;
 
-@Path("/player")
-public class PlayerEndpoint implements Pointable {
+@Path("/Award")
+public class PreludeEndpoint implements Pointable {
 
 	@Inject
-	private PlayerService service;
+	private PreludeService service;
 
-	public void setService(PlayerService service) {
+	public void setService(PreludeService service) {
 		this.service = service;
 	}
 
@@ -33,8 +33,8 @@ public class PlayerEndpoint implements Pointable {
 	@Path("/add")
 	@POST
 	@Produces({ "application/json" })
-	public String add(String player) {
-		return service.add(player);
+	public String add(String Award) {
+		return service.add(Award);
 	}
 
 	@Override
@@ -60,5 +60,5 @@ public class PlayerEndpoint implements Pointable {
 	public String update(@PathParam("id") Long id, String entity) {
 		return service.update(id, entity);
 	}
-
 }
+

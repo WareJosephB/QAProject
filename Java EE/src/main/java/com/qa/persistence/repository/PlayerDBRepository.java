@@ -20,7 +20,7 @@ import com.qa.util.JSONUtil;
 public class PlayerDBRepository implements PlayerRepositoriable {
 
 	@PersistenceContext(unitName = "primary")
-	private EntityManager manager;
+	private static EntityManager manager;
 
 	@Inject
 	private JSONUtil util;
@@ -59,7 +59,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 
 	@Override
 	public String get(Long id) {
-		return "["+util.getJSONForObject(manager.find(Player.class, id))+"]";
+		return "[" + util.getJSONForObject(manager.find(Player.class, id)) + "]";
 	}
 
 	public void setManager(EntityManager manager) {
@@ -82,15 +82,20 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 	}
 
 	@Override
+	@Transactional(REQUIRED)
 	public String update(Long id, String entity) {
 		Player player1 = manager.find(Player.class, id);
 		Player player2 = util.getObjectForJSON(entity, Player.class);
 		if (player1 != null) {
 			player1.setName(player2.getName());
-			return "{\"message\": \"Player updated successfully.\"}";
+			return player1.getName();
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}
 
+	}
+
+	public static Player getPlayer(long playerID) {
+		return manager.find(Player.class, playerID);
 	}
 }

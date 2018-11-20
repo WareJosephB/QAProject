@@ -7,12 +7,12 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="CC">
                 <div id="player">
                     <TopTable />
                     <Player />
                 </div>
-                <div id="game">
+                <div id="game" className="game">
                     <Game />
                 </div> 
             </div>

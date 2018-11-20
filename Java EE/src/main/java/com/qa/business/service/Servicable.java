@@ -9,7 +9,7 @@ public interface Servicable {
 	String delete(Long id);
 
 	String get(Long id);
-	
+
 	String update(Long id, String entity);
 
 }

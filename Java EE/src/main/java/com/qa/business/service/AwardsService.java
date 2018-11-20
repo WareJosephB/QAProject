@@ -2,21 +2,21 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
-import com.qa.persistence.repository.PlayerRepositoriable;
+import com.qa.persistence.repository.AwardsRepositoriable;
 
-public class PlayerService implements Servicable {
+public class AwardsService implements Servicable{
 
 	@Inject
-	private PlayerRepositoriable repo;
-
+	private AwardsRepositoriable repo;
+	
 	@Override
 	public String getAll() {
 		return repo.getAll();
 	}
 
 	@Override
-	public String add(String player) {
-		return repo.add(player);
+	public String add(String entity) {
+		return repo.add(entity);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class PlayerService implements Servicable {
 
 	@Override
 	public String update(Long id, String entity) {
-		return repo.update(id, entity);
+		return "";
 	}
 
 }

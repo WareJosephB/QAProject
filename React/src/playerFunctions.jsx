@@ -17,25 +17,31 @@ export const del = 'delete/';
 
 export const addPlayer = (event) => {
         event.preventDefault();
+
+        var headConfig = {headers: ""}
+
         axios.post(base+add, {
             name : document.getElementById('newName').value
         }).then(response => {
+            console.log(response);
             document.getElementById('confirmAP').innerHTML = response.data.message;
         }).catch(function (error) {
             console.log(error)
         })
     window.location.reload();
-    }
+}
 
 export const getPlayer = (event) => {
     event.preventDefault();
-    document.getElementById('updatePlayerForm').innerHTML+="<input id = 'updateName' type = 'text'/><input type = 'submit' value = 'Confirm Update'/><p id = 'confirmUP'></p>";
-    axios.get(base+get+document.getElementById('playId').value).then(response => {
-        document.getElementById('updatedName').placeholder=(response.data.name);
+    const Num = document.getElementById('playId').value;
+    axios.get(base+get+Num).then(response => {
+        document.getElementById('playId').value = Num;
+        document.getElementById('updatePlayerForm').innerHTML += "<input style='width: 25%' id = 'updateName' type = 'text' placeholder="+response.data.name+"/><input style='width: 25%' type = 'submit' value = 'Confirm Update'/>";
         }).catch(function (error) {
             console.log(error)
         })
-    }
+
+}
 
 export const getAll = (event) => {
     axios.get(base+All).then(response => {
@@ -43,7 +49,7 @@ export const getAll = (event) => {
         }).catch(function (error) {
             console.log(error)
         })
-    }
+}
 
 export const deletePlayer = (event) => {
     axios.delete(base+del+event).then(response => {
@@ -52,7 +58,7 @@ export const deletePlayer = (event) => {
             console.log(error)
         })
     window.location.reload();
-    }
+}
 
 export const updatePlayer = (event) => {
     event.preventDefault();
@@ -64,4 +70,4 @@ export const updatePlayer = (event) => {
         console.log(error)
     })
     window.location.reload();
-    }
+}
