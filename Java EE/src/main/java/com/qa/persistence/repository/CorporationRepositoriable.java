@@ -1,15 +1,13 @@
 package com.qa.persistence.repository;
 
-public interface PlayerRepositoriable {
+public interface CorporationRepositoriable {
 	
 	String getAll();
 
-	String add(String player);
+	String add(String game);
 
 	String delete(Long id);
 
 	String get(Long id);
-
-	String update(Long id, String entity);
 
 }

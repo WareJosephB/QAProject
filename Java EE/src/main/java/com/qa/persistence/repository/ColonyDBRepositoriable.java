@@ -15,12 +15,13 @@ import javax.transaction.Transactional;
 import com.qa.persistence.domain.Awards;
 import com.qa.persistence.domain.Colony;
 import com.qa.util.JSONUtil;
+
 @Transactional(SUPPORTS)
 @Default
-public class ColonyDBRepositoriable implements ColonyRepositoriable{
-	
+public class ColonyDBRepositoriable implements ColonyRepositoriable {
+
 	@PersistenceContext(unitName = "primary")
-	private static EntityManager manager;
+	private EntityManager manager;
 
 	@Inject
 	private JSONUtil util;
@@ -51,5 +52,13 @@ public class ColonyDBRepositoriable implements ColonyRepositoriable{
 	@Override
 	public String get(Long id) {
 		return "[" + util.getJSONForObject(manager.find(Colony.class, id)) + "]";
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 }

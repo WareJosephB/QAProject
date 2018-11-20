@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Player {
-	
+
 	public Player() {
 		this.ELO = 1500;
 	}
@@ -39,7 +39,7 @@ public class Player {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -52,7 +52,8 @@ public class Player {
 	public String toString() {
 		DecimalFormat form = new DecimalFormat("#.00");
 		form.setRoundingMode(RoundingMode.DOWN);
-		return this.getName() + ": " + String.valueOf(form.format(this.getELO())) + " from " + String.valueOf(this.getNumberPlayed());
+		return this.getName() + ": " + String.valueOf(form.format(this.getELO())) + " from "
+				+ String.valueOf(this.getNumberPlayed());
 	}
 
 	public int getNumberPlayed() {
@@ -62,7 +63,7 @@ public class Player {
 	public void setNumberPlayed(int numberPlayed) {
 		this.numberPlayed = numberPlayed;
 	}
-	
+
 	public long getID() {
 		return this.id;
 	}

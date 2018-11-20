@@ -62,25 +62,6 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		return "[" + util.getJSONForObject(manager.find(Player.class, id)) + "]";
 	}
 
-	public void setManager(EntityManager manager) {
-		this.manager = manager;
-	}
-
-	public void setUtil(JSONUtil util) {
-		this.util = util;
-	}
-
-	@Override
-	public String changeName(Long id, String name) {
-		Player player = manager.find(Player.class, id);
-		if (player != null) {
-			player.setName(name);
-			return "{\"message\": \"Player update succesfully.\"}";
-		} else {
-			return "{\"message\": \"Player not found.\"}";
-		}
-	}
-
 	@Override
 	@Transactional(REQUIRED)
 	public String update(Long id, String entity) {
@@ -93,6 +74,14 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 			return "{\"message\": \"Player not found.\"}";
 		}
 
+	}
+
+	public void setManager(EntityManager manager) {
+		PlayerDBRepository.manager = manager;
+	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 
 	public static Player getPlayer(long playerID) {

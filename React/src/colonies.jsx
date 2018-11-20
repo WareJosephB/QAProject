@@ -4,35 +4,25 @@ import {ColonyRows, getColonies} from './expansions.jsx';
 export default class Colonies extends Component{
     constructor(props){
         super(props);
-        this.state({
+        this.state = {
             colonies : this.props.active,
-            players : this.props.players
-        });
+            players : this.props.players,
+            aridor : 0
+        };
     }
 
     render(){
-        return (
-            <div></div>
-        )
-        // var outputRows = "";
-        // if (this.state.colonies != 0){
-        //     const colonies = getColonies();
-        //     for (var i = 0; i < this.props.players+1; i++){
-        //         outputRows += <ColonyRows number={i} colonies={colonies}/>
-        //         if (i == 3){
-        //             outputRows += "<br/>";
-
-        // var colonyRows = "";
-        // if (this.state.colonies !== 0){
-        //     const colonies = getColonies();
-        //     for (var i = 0; i < this.props.players+1; i++){
-        //         colonyRows += <ColonyRow number={i} colonies={colonies}/>
-        //         if (i === 3){
-        //             colonyRows += "<br/>";
-
-        //         }
-        //     }
-        // }
-        // return (<div>{outputRows}</div>);
+        var outputRows = "";
+        if (this.state.colonies !== 0){
+            const colonies = getColonies();
+            for (var i = 0; i < Math.min(this.state.players+2, 5)+this.state.aridor; i++){
+                outputRows += <ColonyRows number={i} colonies={colonies}/>
+                if ((i === 3 && (Math.min(this.state.players+2, 5)+this.state.aridor < 7))){
+                    outputRows += "<br/>";
+                } 
+                if ((i === 4 && (Math.min(this.state.players+2, 5)+this.state.aridor > 6))){
+                    outputRows += "<br/>";
+                }
+        return (<div>{outputRows}</div>);
     }
-}
+}}}

@@ -20,7 +20,7 @@ import com.qa.util.JSONUtil;
 public class AwardDBRepository implements AwardsRepositoriable {
 
 	@PersistenceContext(unitName = "primary")
-	private static EntityManager manager;
+	private EntityManager manager;
 
 	@Inject
 	private JSONUtil util;
@@ -51,5 +51,13 @@ public class AwardDBRepository implements AwardsRepositoriable {
 	@Override
 	public String get(Long id) {
 		return "[" + util.getJSONForObject(manager.find(Awards.class, id)) + "]";
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 }

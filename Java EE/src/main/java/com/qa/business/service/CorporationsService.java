@@ -2,12 +2,12 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
-import com.qa.persistence.repository.AwardsRepositoriable;
+import com.qa.persistence.repository.CorporationRepositoriable;
 
-public class AwardsService implements Servicable {
+public class CorporationsService implements Servicable {
 
 	@Inject
-	private AwardsRepositoriable repo;
+	private CorporationRepositoriable repo;
 
 	@Override
 	public String getAll() {

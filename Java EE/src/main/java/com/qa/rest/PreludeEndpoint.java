@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 
 import com.qa.business.service.PreludeService;
 
-@Path("/Award")
+@Path("/prelude")
 public class PreludeEndpoint implements Pointable {
 
 	@Inject
@@ -61,4 +61,3 @@ public class PreludeEndpoint implements Pointable {
 		return service.update(id, entity);
 	}
 }
-

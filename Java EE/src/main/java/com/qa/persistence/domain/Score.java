@@ -44,6 +44,9 @@ public class Score {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "awardid")
 	private List<Awards> awardsSecond;
+	private int greeneries;
+	private int cities;
+	private int fleets;
 
 	public List<Awards> getAwardsWon() {
 		return awardsWon;
@@ -121,6 +124,30 @@ public class Score {
 
 	public void setCorporation(Corporation corporation) {
 		this.corporation = corporation;
+	}
+
+	public int getGreeneries() {
+		return greeneries;
+	}
+
+	public void setGreeneries(int greeneries) {
+		this.greeneries = greeneries;
+	}
+
+	public int getFleets() {
+		return fleets;
+	}
+
+	public void setFleets(int fleets) {
+		this.fleets = fleets;
+	}
+
+	public int getCities() {
+		return cities;
+	}
+
+	public void setCities(int cities) {
+		this.cities = cities;
 	}
 
 }

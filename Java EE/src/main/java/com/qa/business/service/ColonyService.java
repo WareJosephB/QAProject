@@ -4,11 +4,11 @@ import javax.inject.Inject;
 
 import com.qa.persistence.repository.ColonyRepositoriable;
 
-public class ColonyService implements Servicable{
+public class ColonyService implements Servicable {
 
 	@Inject
 	private ColonyRepositoriable repo;
-	
+
 	@Override
 	public String getAll() {
 		return repo.getAll();

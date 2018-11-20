@@ -5,11 +5,11 @@ import javax.inject.Inject;
 import com.qa.persistence.repository.ColonyRepositoriable;
 import com.qa.persistence.repository.PreludeRepositoriable;
 
-public class PreludeService implements Servicable{
+public class PreludeService implements Servicable {
 
 	@Inject
 	private PreludeRepositoriable repo;
-	
+
 	@Override
 	public String getAll() {
 		return repo.getAll();

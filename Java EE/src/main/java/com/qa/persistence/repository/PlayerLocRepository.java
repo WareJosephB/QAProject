@@ -65,17 +65,6 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	}
 
 	@Override
-	public String changeName(Long id, String name) {
-		Player player = players.get(id);
-		if (player != null) {
-			player.setName(name);
-			return "{\"message\": \"Player updated successfully.\"}";
-		} else {
-			return "{\"message\": \"Player not found.\"}";
-		}
-	}
-
-	@Override
 	public String update(Long id, String entity) {
 		Player player1 = players.get(id);
 		Player player2 = util.getObjectForJSON(entity, Player.class);

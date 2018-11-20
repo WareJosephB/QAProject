@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getGame, addGame} from './gameFunctions.jsx'
+import {getGame, addGame, generateFields} from './gameFunctions.jsx'
 
 export default class Game extends Component {
     
@@ -15,6 +15,10 @@ export default class Game extends Component {
                 </form>
                     <div id = 'output'>
                     </div>
+                <form onSubmit = {addGame}>
+                    <input type = 'button' value='Add Game' id = 'begin adding game' onClick={generateFields}/>
+                    <div id='NG'></div>
+                </form>
             </div>
         )
     }

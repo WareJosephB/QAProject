@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Game;
-import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
 import com.qa.util.JSONUtil;
 
@@ -65,14 +64,6 @@ public class GameDBRepository implements GameRepositoriable {
 		return "[" + util.getJSONForObject(manager.find(Game.class, id)) + "]";
 	}
 
-	public void setManager(EntityManager manager) {
-		this.manager = manager;
-	}
-
-	public void setUtil(JSONUtil util) {
-		this.util = util;
-	}
-
 	@Transactional(REQUIRED)
 	@Override
 	public String update(Long id, String entity) {
@@ -86,6 +77,14 @@ public class GameDBRepository implements GameRepositoriable {
 		} else {
 			return "{\"message\": \"Game not found.\"}";
 		}
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.qa.rest;
 
 import javax.inject.Inject;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,15 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.qa.business.service.AwardsService;
+import com.qa.business.service.ColonyService;
 
-@Path("/awards")
-public class AwardsEndpoint implements Pointable {
+@Path("/colony")
+public class ColonyEndpoint implements Pointable {
 
 	@Inject
-	private AwardsService service;
+	private ColonyService service;
 
-	public void setService(AwardsService service) {
+	public void setService(ColonyService service) {
 		this.service = service;
 	}
 
@@ -33,8 +34,8 @@ public class AwardsEndpoint implements Pointable {
 	@Path("/add")
 	@POST
 	@Produces({ "application/json" })
-	public String add(String Award) {
-		return service.add(Award);
+	public String add(String Colony) {
+		return service.add(Colony);
 	}
 
 	@Override

@@ -9,15 +9,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.qa.business.service.AwardsService;
+import com.qa.business.service.CorporationsService;
 
-@Path("/awards")
-public class AwardsEndpoint implements Pointable {
+@Path("/corporation")
+public class CorporationEndpoint implements Pointable {
 
 	@Inject
-	private AwardsService service;
+	private CorporationsService service;
 
-	public void setService(AwardsService service) {
+	public void setService(CorporationsService service) {
 		this.service = service;
 	}
 
@@ -33,8 +33,8 @@ public class AwardsEndpoint implements Pointable {
 	@Path("/add")
 	@POST
 	@Produces({ "application/json" })
-	public String add(String Award) {
-		return service.add(Award);
+	public String add(String Corporation) {
+		return service.add(Corporation);
 	}
 
 	@Override

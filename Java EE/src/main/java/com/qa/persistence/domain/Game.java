@@ -23,7 +23,8 @@ public class Game {
 
 	}
 
-	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores, Collection<Colony> colonies) {
+	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores,
+			Collection<Colony> colonies) {
 		this.scores = scores;
 		this.map = map;
 		this.P = P;
