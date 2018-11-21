@@ -24,6 +24,11 @@ public class Player {
 		this.name = name;
 		this.setNumberPlayed(0);
 	}
+	
+	public Player(String name, long id) {
+		this.name = name;
+		this.id = id;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

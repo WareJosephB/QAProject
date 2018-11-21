@@ -2,11 +2,13 @@ package com.qa.persistence.repository;
 
 import java.util.HashMap;
 
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import com.qa.persistence.domain.Corporation;
 import com.qa.util.JSONUtil;
 
+@Alternative
 public class CorporationLocRepository implements CorporationRepositoriable{
 
 	HashMap<Long, Corporation> corporations = new HashMap<Long, Corporation>();

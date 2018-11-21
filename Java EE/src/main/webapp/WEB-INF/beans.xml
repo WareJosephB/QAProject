@@ -29,6 +29,7 @@
                 <class>com.qa.persistence.repository.PlayerLocRepository</class>
                 <class>com.qa.persistence.repository.PreludeLocRepository</class>
                 <class>com.qa.persistence.repository.ColonyLocRepository</class>
+                <class>com.qa.persistence.repository.CorporationLocRepository</class>
 				<class>com.qa.business.service.Calculocal</class>
 				
     </alternatives> --> <!--  uncomment the above for local-only use -->

@@ -70,9 +70,9 @@ public class GameDBRepository implements GameRepositoriable {
 		Game game1 = manager.find(Game.class, id);
 		Game game2 = util.getObjectForJSON(entity, Game.class);
 		if (game1 != null) {
-			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
-			game1.changeGenerations(game2.returnGenerations());
-			game1.changeScores((Collection<Score>) game2.returnScores());
+//			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
+//			game1.changeGenerations(game2.returnGenerations());
+//			game1.changeScores((Collection<Score>) game2.returnScores());
 			return "{\"message\": \"Game updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Game not found.\"}";

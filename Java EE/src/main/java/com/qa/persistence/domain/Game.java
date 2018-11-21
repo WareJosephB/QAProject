@@ -22,52 +22,65 @@ public class Game {
 	public Game() {
 
 	}
-
-	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores,
-			Collection<Colony> colonies) {
+	
+	public Game(List<Score> scores) {
 		this.scores = scores;
-		this.map = map;
-		this.P = P;
-		this.C = C;
-		this.V = V;
-		this.generations = generations;
-		this.colonies = colonies;
-
 	}
+	
+//	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores) {
+//		this.scores = scores;
+//		this.map = map;
+//		this.P = P;
+//		this.C = C;
+//		this.V = V;
+//		this.generations = generations;
+//	}
+//
+//	public Game(int map, boolean P, boolean C, boolean V, int generations, List<Score> scores,
+//			Collection<Colony> colonies) {
+//		this.scores = scores;
+//		this.map = map;
+//		this.P = P;
+//		this.C = C;
+//		this.V = V;
+//		this.generations = generations;
+//		this.colonies = colonies;
+//
+//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gameid")
 	private long id;
-	private int map;
-	private boolean P;
-	private boolean C;
-	private boolean V;
-	private int generations;
+//	private int map;
+//	private boolean P;
+//	private boolean C;
+//	private boolean V;
+//	private int generations;
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@ElementCollection(targetClass = Score.class)
 	@OrderColumn
 	private Collection<Score> scores;
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@ElementCollection(targetClass = Colony.class)
-	@OrderColumn
-	private Collection<Colony> colonies;
+//	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+//	@ElementCollection(targetClass = Colony.class)
+//	@OrderColumn
+//	private Collection<Colony> colonies;
 
-	public boolean returnP() {
-		return this.P;
-	}
-
-	public boolean returnC() {
-		return this.C;
-	}
-
-	public boolean returnV() {
-		return this.V;
-	}
-
-	public int returnGenerations() {
-		return this.generations;
-	}
+//	public boolean returnP() {
+//		return this.P;
+//	}
+//
+//	public boolean returnC() {
+//		return this.C;
+//	}
+//
+//	public boolean returnV() {
+//		return this.V;
+//	}
+//
+//	public int returnGenerations() {
+//		return this.generations;
+//	}
 
 	public List<Score> returnScores() {
 		return (ArrayList<Score>) this.scores;
@@ -77,27 +90,28 @@ public class Game {
 		return this.scores.size();
 	}
 
-	public void changeAddons(boolean P, boolean C, boolean V) {
-		this.P = P;
-		this.C = C;
-		this.V = V;
-	}
+//	public void changeAddons(boolean P, boolean C, boolean V) {
+//		this.P = P;
+//		this.C = C;
+//		this.V = V;
+//	}
 
-	public void changeMap(int map) {
-		this.map = map;
-	}
+//	public void changeMap(int map) {
+//		this.map = map;
+//	}
 
 	public void changeScores(Collection<Score> collection) {
 		this.scores = collection;
 	}
 
-	public void changeGenerations(int generations) {
-		this.generations = generations;
-	}
-
-	public int getMap() {
-		return map;
-	}
+//	public void changeGenerations(int generations) {
+//		this.generations = generations;
+//	}
+//
+//	public String getMap() {
+//		String[] maps = { "Tharsis", "Hellas", "Elysium"};
+//		return maps[map-1];
+//	}
 
 	public long getID() {
 		return this.id;

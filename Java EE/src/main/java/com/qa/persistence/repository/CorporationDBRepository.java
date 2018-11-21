@@ -4,6 +4,7 @@ import static javax.transaction.Transactional.TxType.REQUIRED;
 
 import java.util.List;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import com.qa.persistence.domain.Corporation;
 import com.qa.util.JSONUtil;
 
+@Default
 public class CorporationDBRepository implements CorporationRepositoriable {
 
 	@PersistenceContext(unitName = "primary")
