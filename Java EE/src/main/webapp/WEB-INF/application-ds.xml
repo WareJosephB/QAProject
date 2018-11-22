@@ -10,7 +10,7 @@
       <driver>h2</driver>
       <security>
          <user-name>sa</user-name>
-         <password>sa</password>
+         <password></password>
       </security>
    </datasource>
 </datasources>
