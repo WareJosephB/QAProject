@@ -66,6 +66,6 @@ public class ScoreEndpoint implements Pointable {
 	@GET
 	@Produces({ "application/json" })
 	public String owned() {
-		return  "{\"message\": \"You are a butt, haha owned\"}";
+		return "{\"message\": \"You are a butt, haha owned, score 1 for me.\"}";
 	}
 }
