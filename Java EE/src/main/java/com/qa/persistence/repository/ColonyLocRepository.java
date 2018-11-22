@@ -25,9 +25,8 @@ public class ColonyLocRepository implements ColonyRepositoriable{
 	}
 
 	@Override
-	public String add(String Colony) {
-		Colony newColony = util.getObjectForJSON(Colony, Colony.class);
-		colonys.put(ID, newColony);
+	public String add(Colony colony) {
+		colonys.put(ID, colony);
 		return "{\"message\": \"Colony added successfully. ID number is " + ID + "\"}";
 	}
 

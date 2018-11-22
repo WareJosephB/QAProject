@@ -34,13 +34,12 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String player) {
-		Player newPlayer = util.getObjectForJSON(player, Player.class);
+	public String add(Player player) {
 		String id = "unknown";
-		manager.persist(newPlayer);
+		manager.persist(player);
 		Query q = manager.createQuery("SELECT a FROM Player a ORDER BY playID DESC");
 		Player latestPlayer = (Player) q.getResultList().get(0);
-		if (latestPlayer.equals(newPlayer)) {
+		if (latestPlayer.equals(player)) {
 			id = String.valueOf(latestPlayer.getID());
 		}
 		return "{\"message\": \"Player added successfully. ID number is " + id + ".\"}";
@@ -64,11 +63,10 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String update(Long id, String entity) {
+	public String update(Long id, Player player) {
 		Player player1 = manager.find(Player.class, id);
-		Player player2 = util.getObjectForJSON(entity, Player.class);
 		if (player1 != null) {
-			player1.setName(player2.getName());
+			player1.setName(player.getName());
 			return player1.getName();
 		} else {
 			return "{\"message\": \"Player not found.\"}";

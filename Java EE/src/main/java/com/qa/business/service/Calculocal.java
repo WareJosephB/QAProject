@@ -69,4 +69,12 @@ public class Calculocal implements Calculable {
 
 	}
 
+	@Override
+	public void simpleELO(Player winner, Player loser) {
+		double temp = winner.getELO();
+		winner.playGame();
+		loser.playGame();
+		winner.setELO(ELOchange(winner.getELO(), loser.getELO(), 1d, 16d));
+		loser.setELO(ELOchange(loser.getELO(), temp, 0d, 16d));
+	}
 }

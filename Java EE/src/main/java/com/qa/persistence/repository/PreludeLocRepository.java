@@ -9,7 +9,7 @@ import com.qa.persistence.domain.Prelude;
 import com.qa.util.JSONUtil;
 @Alternative
 public class PreludeLocRepository implements PreludeRepositoriable{
-	HashMap<Long, Prelude> prelude = new HashMap<Long, Prelude>();
+	HashMap<Long, Prelude> preludes = new HashMap<Long, Prelude>();
 
 	@Inject
 	private JSONUtil util;
@@ -18,21 +18,20 @@ public class PreludeLocRepository implements PreludeRepositoriable{
 
 	@Override
 	public String getAll() {
-		Prelude[] thePrelude = prelude.entrySet().toArray(new Prelude[0]);
+		Prelude[] thePrelude = preludes.entrySet().toArray(new Prelude[0]);
 		return util.getJSONForObject(thePrelude);
 	}
 
 	@Override
-	public String add(String Prelude) {
-		Prelude newPrelude = util.getObjectForJSON(Prelude, Prelude.class);
-		prelude.put(ID, newPrelude);
+	public String add(Prelude prelude) {
+		preludes.put(ID, prelude);
 		return "{\"message\": \"Prelude added successfully. ID number is " + ID + "\"}";
 	}
 
 	@Override
 	public String delete(Long id) {
-		if (prelude.get(id) != null) {
-			prelude.remove(id);
+		if (preludes.get(id) != null) {
+			preludes.remove(id);
 			return "{\"message\": \"Prelude deleted successfully.\"}";
 		} else {
 			return "{\"message\": \"Prelude not found.\"}";
@@ -41,8 +40,8 @@ public class PreludeLocRepository implements PreludeRepositoriable{
 
 	@Override
 	public String get(Long id) {
-		if (prelude.get(id) != null) {
-			return util.getJSONForObject(prelude.get(id));
+		if (preludes.get(id) != null) {
+			return util.getJSONForObject(preludes.get(id));
 		} else {
 			return "{\"message\": \"Prelude not found.\"}";
 		}

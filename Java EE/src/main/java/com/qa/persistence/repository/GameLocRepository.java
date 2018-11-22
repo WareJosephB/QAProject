@@ -1,13 +1,12 @@
 package com.qa.persistence.repository;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import com.qa.persistence.domain.Game;
-import com.qa.persistence.domain.Score;
+import com.qa.persistence.domain.SimpleGame;
 import com.qa.util.JSONUtil;
 
 @Alternative
@@ -27,9 +26,8 @@ public class GameLocRepository implements GameRepositoriable {
 	}
 
 	@Override
-	public String add(String game) {
-		Game newGame = util.getObjectForJSON(game, Game.class);
-		games.put(ID, newGame);
+	public String add(Game game) {
+		games.put(ID, game);
 		return "{\"message\": \"Game added successfully. ID number is " + ID + "\"}";
 	}
 
@@ -53,17 +51,21 @@ public class GameLocRepository implements GameRepositoriable {
 	}
 
 	@Override
-	public String update(Long id, String entity) {
+	public String update(Long id, Game game) {
 		Game game1 = games.get(id);
-		Game game2 = util.getObjectForJSON(entity, Game.class);
 		if (game1 != null) {
-//			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
-//			game1.changeGenerations(game2.returnGenerations());
-//			game1.changeScores((Collection<Score>) game2.returnScores());
+			// game1.changeAddons(game.returnP(), game1.returnC(), game2.returnP());
+			// game1.changeGenerations(game.returnGenerations());
 			return "{\"message\": \"Game updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Game not found.\"}";
 		}
+	}
+
+	@Override
+	public String update(SimpleGame simpleGame) {
+		return PlayerLocRepository.update(simpleGame);
+
 	}
 
 }

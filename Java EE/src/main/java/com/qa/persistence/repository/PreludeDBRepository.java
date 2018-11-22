@@ -35,8 +35,8 @@ public class PreludeDBRepository implements PreludeRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String prelude) {
-		manager.persist(util.getObjectForJSON(prelude, Prelude.class));
+	public String add(Prelude prelude) {
+		manager.persist(prelude);
 		return "";
 	}
 

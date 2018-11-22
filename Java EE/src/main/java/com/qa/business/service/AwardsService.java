@@ -2,12 +2,16 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
+import com.qa.persistence.domain.Awards;
 import com.qa.persistence.repository.AwardsRepositoriable;
+import com.qa.util.JSONUtil;
 
 public class AwardsService implements Servicable {
 
 	@Inject
 	private AwardsRepositoriable repo;
+	@Inject
+	private JSONUtil util;
 
 	@Override
 	public String getAll() {
@@ -16,7 +20,8 @@ public class AwardsService implements Servicable {
 
 	@Override
 	public String add(String entity) {
-		return repo.add(entity);
+		Awards awards = util.getObjectForJSON(entity, Awards.class);
+		return repo.add(awards);
 	}
 
 	@Override

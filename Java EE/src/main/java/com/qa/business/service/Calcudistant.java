@@ -69,4 +69,12 @@ public class Calcudistant implements Calculable {
 
 	}
 
+	@Override
+	public void simpleELO(Player winner, Player loser) {
+		double temp = winner.getELO();
+		winner.playGame();
+		loser.playGame();
+		winner.updateELO(ELOchange(winner.getELO(), loser.getELO(), 1d, 16d));
+		loser.updateELO(ELOchange(loser.getELO(), temp, 0d, 16d));
+	}
 }

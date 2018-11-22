@@ -34,13 +34,12 @@ public class ScoreDBRepository implements ScoreRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String score) {
-		Score newScore = util.getObjectForJSON(score, Score.class);
+	public String add(Score score) {
 		String id = "unknown";
-		manager.persist(newScore);
+		manager.persist(score);
 		Query q = manager.createQuery("SELECT a FROM Score a ORDER BY scoreID DESC");
 		Score latestScore = (Score) q.getResultList().get(0);
-		if (latestScore.equals(newScore)) {
+		if (latestScore.equals(score)) {
 			id = String.valueOf(latestScore.getID());
 		}
 		return "{\"message\": \"Score added successfully. ID number is " + id + ".\"}";

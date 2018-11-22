@@ -2,12 +2,16 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
+import com.qa.persistence.domain.Score;
 import com.qa.persistence.repository.ScoreRepositoriable;
+import com.qa.util.JSONUtil;
 
 public class ScoreService implements Servicable {
 
 	@Inject
 	private ScoreRepositoriable repo;
+	@Inject
+	private JSONUtil util;
 
 	@Override
 	public String getAll() {
@@ -15,7 +19,8 @@ public class ScoreService implements Servicable {
 	}
 
 	@Override
-	public String add(String score) {
+	public String add(String entity) {
+		Score score = util.getObjectForJSON(entity, Score.class);
 		return repo.add(score);
 	}
 

@@ -25,9 +25,8 @@ public class AwardsLocRepository implements AwardsRepositoriable {
 	}
 
 	@Override
-	public String add(String Awards) {
-		Awards newAwards = util.getObjectForJSON(Awards, Awards.class);
-		awards.put(ID, newAwards);
+	public String add(Awards award) {
+		awards.put(ID, award);
 		return "{\"message\": \"Awards added successfully. ID number is " + ID + "\"}";
 	}
 

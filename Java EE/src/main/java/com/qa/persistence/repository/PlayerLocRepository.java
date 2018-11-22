@@ -6,8 +6,10 @@ import java.util.HashMap;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
+import com.qa.business.service.Calculable;
 import com.qa.persistence.domain.Player;
 import com.qa.persistence.domain.Score;
+import com.qa.persistence.domain.SimpleGame;
 import com.qa.util.JSONUtil;
 
 @Alternative
@@ -17,6 +19,9 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 
 	@Inject
 	private JSONUtil util;
+
+	@Inject
+	private static Calculable calc;
 
 	private static long ID = 1;
 
@@ -35,9 +40,8 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	}
 
 	@Override
-	public String add(String player) {
-		Player newPlayer = util.getObjectForJSON(player, Player.class);
-		players.put(ID, newPlayer);
+	public String add(Player player) {
+		players.put(ID, player);
 		return "{\"message\": \"Player added successfully. ID number is " + ID + "\"}";
 	}
 
@@ -65,16 +69,20 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 	}
 
 	@Override
-	public String update(Long id, String entity) {
+	public String update(Long id, Player player) {
 		Player player1 = players.get(id);
-		Player player2 = util.getObjectForJSON(entity, Player.class);
 		if (player1 != null) {
-			player1.setName(player2.getName());
+			player1.setName(player.getName());
 			return "{\"message\": \"Player updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}
 
+	}
+
+	public static String update(SimpleGame simpleGame) {
+		calc.simpleELO(players.get(simpleGame.getPlayer1()), players.get(simpleGame.getPlayer2()));
+		return "{\"message\": \"ELOs updated.\"}";
 	}
 
 }

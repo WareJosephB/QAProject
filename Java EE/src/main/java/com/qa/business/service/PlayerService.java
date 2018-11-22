@@ -2,20 +2,25 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
+import com.qa.persistence.domain.Player;
 import com.qa.persistence.repository.PlayerRepositoriable;
+import com.qa.util.JSONUtil;
 
 public class PlayerService implements Servicable {
 
 	@Inject
 	private PlayerRepositoriable repo;
-
+	@Inject
+	private JSONUtil util;
+	
 	@Override
 	public String getAll() {
 		return repo.getAll();
 	}
 
 	@Override
-	public String add(String player) {
+	public String add(String entity) {
+		Player player = util.getObjectForJSON(entity, Player.class);
 		return repo.add(player);
 	}
 
@@ -31,7 +36,8 @@ public class PlayerService implements Servicable {
 
 	@Override
 	public String update(Long id, String entity) {
-		return repo.update(id, entity);
+		Player player = util.getObjectForJSON(entity, Player.class);
+		return repo.update(id, player);
 	}
 
 }

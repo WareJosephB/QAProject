@@ -1,10 +1,12 @@
 package com.qa.persistence.repository;
 
+import com.qa.persistence.domain.Score;
+
 public interface ScoreRepositoriable {
 
 	String getAll();
 
-	String add(String score);
+	String add(Score score);
 
 	String delete(Long id);
 

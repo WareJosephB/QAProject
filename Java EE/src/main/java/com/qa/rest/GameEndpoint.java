@@ -60,4 +60,12 @@ public class GameEndpoint implements Pointable {
 	public String update(@PathParam("id") Long id, String entity) {
 		return service.update(id, entity);
 	}
+	
+	@Path("/match")
+	@POST
+	@Produces({ "application/json" })
+	public String update(String simpleGame) {
+		return service.update(simpleGame);
+	}
+	
 }

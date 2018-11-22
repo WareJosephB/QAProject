@@ -25,9 +25,8 @@ public class CorporationLocRepository implements CorporationRepositoriable{
 	}
 
 	@Override
-	public String add(String Corporation) {
-		Corporation newCorporation = util.getObjectForJSON(Corporation, Corporation.class);
-		corporations.put(ID, newCorporation);
+	public String add(Corporation corporation) {
+		corporations.put(ID, corporation);
 		return "{\"message\": \"Corporation added successfully. ID number is " + ID + "\"}";
 	}
 

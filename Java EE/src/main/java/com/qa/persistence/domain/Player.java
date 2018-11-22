@@ -24,7 +24,7 @@ public class Player {
 		this.name = name;
 		this.setNumberPlayed(0);
 	}
-	
+
 	public Player(String name, long id) {
 		this.name = name;
 		this.id = id;
@@ -69,8 +69,17 @@ public class Player {
 		this.numberPlayed = numberPlayed;
 	}
 
+	public void playGame() {
+		this.setNumberPlayed(this.getNumberPlayed() + 1);
+	}
+
 	public long getID() {
 		return this.id;
+	}
+
+	public void setELO(double elOchange) {
+		this.setELO(elOchange);
+		
 	}
 
 }

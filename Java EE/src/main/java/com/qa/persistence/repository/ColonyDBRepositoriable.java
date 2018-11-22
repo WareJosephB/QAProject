@@ -35,8 +35,8 @@ public class ColonyDBRepositoriable implements ColonyRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String colony) {
-		manager.persist(util.getObjectForJSON(colony, Colony.class));
+	public String add(Colony colony) {
+		manager.persist(colony);
 		return "";
 	}
 

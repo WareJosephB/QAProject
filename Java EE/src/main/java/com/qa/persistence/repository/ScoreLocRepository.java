@@ -25,9 +25,8 @@ public class ScoreLocRepository implements ScoreRepositoriable {
 	}
 
 	@Override
-	public String add(String score) {
-		Score newScore = util.getObjectForJSON(score, Score.class);
-		scores.put(ID, newScore);
+	public String add(Score score) {
+		scores.put(ID, score);
 		return "{\"message\": \"Score added successfully. ID number is " + ID + "\"}";
 	}
 

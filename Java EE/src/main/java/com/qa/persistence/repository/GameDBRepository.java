@@ -3,7 +3,6 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -13,8 +12,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.qa.business.service.Calculable;
 import com.qa.persistence.domain.Game;
-import com.qa.persistence.domain.Score;
+import com.qa.persistence.domain.Player;
+import com.qa.persistence.domain.SimpleGame;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -26,6 +27,9 @@ public class GameDBRepository implements GameRepositoriable {
 
 	@Inject
 	private JSONUtil util;
+	
+	@Inject
+	private Calculable calc;
 
 	@Override
 	public String getAll() {
@@ -36,13 +40,12 @@ public class GameDBRepository implements GameRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String game) {
-		Game newGame = util.getObjectForJSON(game, Game.class);
+	public String add(Game game) {
 		String id = "unknown";
-		manager.merge(newGame);
+		manager.merge(game);
 		Query q = manager.createQuery("SELECT a FROM Game a ORDER BY playID DESC");
 		Game latestGame = (Game) q.getResultList().get(0);
-		if (latestGame.equals(newGame)) {
+		if (latestGame.equals(game)) {
 			id = String.valueOf(latestGame.getID());
 		}
 		return "{\"message\": \"Game added successfully. ID number is " + id + ".\"}";
@@ -66,13 +69,11 @@ public class GameDBRepository implements GameRepositoriable {
 
 	@Transactional(REQUIRED)
 	@Override
-	public String update(Long id, String entity) {
+	public String update(Long id, Game game) {
 		Game game1 = manager.find(Game.class, id);
-		Game game2 = util.getObjectForJSON(entity, Game.class);
 		if (game1 != null) {
-//			game1.changeAddons(game2.returnP(), game1.returnC(), game2.returnP());
-//			game1.changeGenerations(game2.returnGenerations());
-//			game1.changeScores((Collection<Score>) game2.returnScores());
+//			game1.changeAddons(game.returnP(), game1.returnC(), game2.returnP());
+//			game1.changeGenerations(game.returnGenerations());
 			return "{\"message\": \"Game updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Game not found.\"}";
@@ -85,6 +86,14 @@ public class GameDBRepository implements GameRepositoriable {
 
 	public void setUtil(JSONUtil util) {
 		this.util = util;
+	}
+
+	@Override
+	public String update(SimpleGame simpleGame) {
+		Player player1 = manager.find(Player.class, simpleGame.getPlayer1());
+		Player player2 = manager.find(Player.class, simpleGame.getPlayer2());
+		calc.simpleELO(player1, player2);
+		return "{\"message\": \"ELOs updated.\"}";
 	}
 
 }

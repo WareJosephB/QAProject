@@ -32,8 +32,8 @@ public class CorporationDBRepository implements CorporationRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String corporation) {
-		manager.persist(util.getObjectForJSON(corporation, Corporation.class));
+	public String add(Corporation corporation) {
+		manager.persist(corporation);
 		return "";
 	}
 

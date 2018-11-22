@@ -13,4 +13,5 @@ public interface Calculable {
 
 	double ELOchange(double ELOPlayer, double ELOOpponent, double result, double weighting);
 
+	void simpleELO(Player winner, Player loser);
 }

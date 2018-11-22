@@ -2,13 +2,16 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
-import com.qa.persistence.repository.ColonyRepositoriable;
+import com.qa.persistence.domain.Prelude;
 import com.qa.persistence.repository.PreludeRepositoriable;
+import com.qa.util.JSONUtil;
 
 public class PreludeService implements Servicable {
 
 	@Inject
 	private PreludeRepositoriable repo;
+	@Inject
+	private JSONUtil util;
 
 	@Override
 	public String getAll() {
@@ -17,7 +20,8 @@ public class PreludeService implements Servicable {
 
 	@Override
 	public String add(String entity) {
-		return repo.add(entity);
+		Prelude prelude = util.getObjectForJSON(entity, Prelude.class);
+		return repo.add(prelude);
 	}
 
 	@Override

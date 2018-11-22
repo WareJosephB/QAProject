@@ -34,8 +34,8 @@ public class AwardDBRepository implements AwardsRepositoriable {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String add(String award) {
-		manager.persist(util.getObjectForJSON(award, Awards.class));
+	public String add(Awards awards) {
+		manager.persist(awards);
 		return "";
 	}
 

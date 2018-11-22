@@ -2,13 +2,17 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
+import com.qa.persistence.domain.Corporation;
 import com.qa.persistence.repository.CorporationRepositoriable;
+import com.qa.util.JSONUtil;
 
 public class CorporationsService implements Servicable {
 
 	@Inject
 	private CorporationRepositoriable repo;
-
+	@Inject
+	private JSONUtil util;
+	
 	@Override
 	public String getAll() {
 		return repo.getAll();
@@ -16,7 +20,8 @@ public class CorporationsService implements Servicable {
 
 	@Override
 	public String add(String entity) {
-		return repo.add(entity);
+		Corporation corporation = util.getObjectForJSON(entity, Corporation.class);
+		return repo.add(corporation);
 	}
 
 	@Override
