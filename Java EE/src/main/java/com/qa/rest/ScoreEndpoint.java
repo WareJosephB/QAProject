@@ -61,4 +61,11 @@ public class ScoreEndpoint implements Pointable {
 		return service.update(id, entity);
 
 	}
+	
+	@Path("/1")
+	@GET
+	@Produces({ "application/json" })
+	public String owned() {
+		return  "{\"message\": \"You are a butt, haha owned\"}";
+	}
 }
