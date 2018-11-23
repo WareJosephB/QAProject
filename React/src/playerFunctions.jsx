@@ -2,6 +2,11 @@ import Axios from 'axios';
 import {player, add, get, upd, del} from './const.jsx';
 
 export const addPlayer = (event) => {
+    console.log(player);
+    console.log(add);
+    console.log(player+add);
+    console.log(document.getElementById('New Name').value);
+    console.log(player+add+document.getElementById('New Name').value);
     event.preventDefault();
     Axios.post(player+add, {
         name : document.getElementById('New Name').value
