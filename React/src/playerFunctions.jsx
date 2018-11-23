@@ -2,10 +2,6 @@ import Axios from 'axios';
 import {player, add, get, upd, del} from './const.jsx';
 
 export const addPlayer = (event) => {
-    console.log(player);
-    console.log(add);
-    console.log(player+add);
-    console.log(document.getElementById('New Name').value);
     event.preventDefault();
     Axios.post(player+add, {
         name : document.getElementById('New Name').value
@@ -34,7 +30,8 @@ export function deletePlayer(playerNumber){
     window.location.reload();
 }
 
-export function updatePlayer(playerNumber){
+export function updatePlayer(event){
+    event.preventDefault();
     Axios.put(player+upd+document.getElementById('Player ID').value, {
         name : document.getElementById('Update Name').value
     }).then(response => {
