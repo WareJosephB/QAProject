@@ -1,7 +1,7 @@
-const url = '35.205.54.81:';
+const url = 'http://35.205.54.81:';
 const port = '8080';
 
-const root = url+port+'/access/';
+const root = url+port+'/MultiplayerELO/access/';
 
 export const player = root + 'player/';
 export const game = root + 'game/';
