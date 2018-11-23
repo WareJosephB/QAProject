@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {player, all, del} from './const.jsx';
+import {player, all} from './const.jsx';
+import {deletePlayer} from './playerFunctions.jsx';
 import Axios from 'axios';
 
 export default class topTable extends Component {
@@ -26,20 +27,9 @@ export default class topTable extends Component {
         })
     }
 
-    deletePlayer = (rowid) => {
-        console.log(player);
-        console.log(del);
-        console.log(rowid);
-        console.log(player+del+rowid);
-        Axios.delete(player+del+rowid).then((res) => {
-            window.location.reload()}).catch((e) => {
-                console.log(e);
-            });
-    }
-
     cellButton(cell, row) {
         return (
-           <button type="button" onClick={() => this.deletePlayer(row.id)}>
+           <button type="button" onClick={() => deletePlayer(row.id)}>
            Delete Player
            </button>
         )
