@@ -96,7 +96,7 @@ public class GameDBRepository implements GameRepositoriable {
 		double loser = player2.getELO();
 		player1.updateELO(calc.simpleWin(player1, loser));
 		player2.updateELO(calc.simpleLost(winner, player2));
-		return "{\"message\": \"ELOs updated.\"}"+String.valueOf(simpleGame.getPlayer1());
+		return "{\"message\": \"ELOs updated.\"}"+player1.toString();
 	}
 
 }
