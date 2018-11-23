@@ -92,7 +92,10 @@ public class GameDBRepository implements GameRepositoriable {
 	public String update(SimpleGame simpleGame) {
 		Player player1 = manager.find(Player.class, simpleGame.getPlayer1());
 		Player player2 = manager.find(Player.class, simpleGame.getPlayer2());
-		calc.simpleELO(player1, player2);
+		double winner = player1.getELO();
+		double loser = player2.getELO();
+		player1.updateELO(calc.simpleWin(player1, loser));
+		player2.updateELO(calc.simpleLost(winner, player2));
 		return "{\"message\": \"ELOs updated.\"}"+String.valueOf(simpleGame.getPlayer1());
 	}
 
