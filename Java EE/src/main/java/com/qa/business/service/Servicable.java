@@ -6,8 +6,10 @@ public interface Servicable {
 
 	String add(String entity);
 
-	String delete(int id);
+	String delete(Long id);
 
-	String get(int id);
+	String get(Long id);
+
+	String update(Long id, String entity);
 
 }
