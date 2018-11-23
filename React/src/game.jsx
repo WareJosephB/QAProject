@@ -15,14 +15,7 @@ export default class Game extends Component {
     render(){
         return(
             <div>
-                <select id='numPlayers' onSelect={this.getPlayers}>
-                    <option value='2'>2 Player</option>
-                    <option value='2'>3 Player</option>
-                    <option value='2'>4 Player</option>
-                    <option value='2'>5 Player</option>
-                </select>
-                <GameForm players={this.state.numPlayers} onSubmit={addGame}/>
-                <div id = 'gamePlaceholder'></div>
+                <GameForm onSubmit={addGame}/>
                 <p id = 'Confirm Game'></p>
             </div>
         )

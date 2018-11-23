@@ -6,7 +6,6 @@ export const addPlayer = (event) => {
     console.log(add);
     console.log(player+add);
     console.log(document.getElementById('New Name').value);
-    console.log(player+add+document.getElementById('New Name').value);
     event.preventDefault();
     Axios.post(player+add, {
         name : document.getElementById('New Name').value
