@@ -12,7 +12,7 @@ export default class GameForm extends Component {
             player1 : parseInt(document.getElementById('player1').value),
             player2 : parseInt(document.getElementById('player2').value)
         })
-        Axios.post(game+"match", {
+        Axios.put(game+"match", {
                 player1 : parseInt(document.getElementById('player1').value),
                 player2 : parseInt(document.getElementById('player2').value)
             }).then(response => {
