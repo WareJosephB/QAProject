@@ -93,7 +93,7 @@ public class GameDBRepository implements GameRepositoriable {
 		Player player1 = manager.find(Player.class, simpleGame.getPlayer1());
 		Player player2 = manager.find(Player.class, simpleGame.getPlayer2());
 		calc.simpleELO(player1, player2);
-		return "{\"message\": \"ELOs updated.\"}";
+		return "{\"message\": \"ELOs updated.\"}"+String.valueOf(simpleGame.getPlayer1());
 	}
 
 }

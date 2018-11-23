@@ -18,7 +18,6 @@ export default class topTable extends Component {
 
     populateTable = () => {
         Axios.get(player+all).then(res => {
-            console.log(res);
             this.setState({
                 players : res.data
             }).catch((e) => {
