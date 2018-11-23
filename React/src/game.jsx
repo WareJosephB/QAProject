@@ -1,24 +1,29 @@
 import React, {Component} from 'react';
-import {getGame, addGame, generateFields} from './gameFunctions.jsx'
+import {addGame} from './gameFunctions.jsx'
+import GameForm from './gameForm.jsx'
 
 export default class Game extends Component {
+    constructor(props){
+        super(props);
+        this.state = {numPlayers : 2};
+    }
     
+    getPlayers = () => {
+        this.setState({numPlayers : this.value});
+    }
+
     render(){
         return(
             <div>
-                <form id = "NG">
-                    {/* <input type = 'button' className = "leftButton" id = 'initAddGame' onClick={generateFields()}>Add Game</input>; */}
-                </form>
-                <form onSubmit = {getGame}>
-                    <input id = 'gameId' type = 'number' placeholder = 'Game ID Number'/>
-                    <input type = 'submit' value = 'Find Game by ID'/>
-                </form>
-                    <div id = 'output'>
-                    </div>
-                <form onSubmit = {addGame}>
-                    <input type = 'button' value='Add Game' id = 'begin adding game' onClick={generateFields}/>
-                    <div id='NG'></div>
-                </form>
+                <select id='numPlayers' onSelect={this.getPlayers}>
+                    <option value='2'>2 Player</option>
+                    <option value='2'>3 Player</option>
+                    <option value='2'>4 Player</option>
+                    <option value='2'>5 Player</option>
+                </select>
+                <GameForm players={this.state.numPlayers} onSubmit={addGame}/>
+                <div id = 'gamePlaceholder'></div>
+                <p id = 'Confirm Game'></p>
             </div>
         )
     }
