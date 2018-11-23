@@ -7,7 +7,7 @@ import Axios from 'axios';
 export default class GameForm extends Component {
 
     changeELO = () => {
-        Axios.post(game+"/match", {
+        Axios.post(game+"match", {
                 player1 : document.getElementById('player1').value,
                 player2 : document.getElementById('player2').value
             }).then(response => {
