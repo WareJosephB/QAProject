@@ -11,12 +11,6 @@ export const addPlayer = (event) => {
     window.location.reload();
 }
 
-export function getPlayer(playerNumber){
-    Axios.get(player+get+playerNumber).then(response => {
-        return(response.data);
-    })
-}
-
 export function deletePlayer(playerNumber){
     Axios.delete(player+del+playerNumber).then(response => {
         document.getElementById('Confirm Player').innerHTML = response.data.message;
