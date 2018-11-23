@@ -62,7 +62,7 @@ public class GameEndpoint implements Pointable {
 	}
 	
 	@Path("/match")
-	@PUT
+	@POST
 	@Produces({ "application/json" })
 	public String update(String simpleGame) {
 		return service.update(simpleGame);
