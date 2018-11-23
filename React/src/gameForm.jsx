@@ -6,7 +6,12 @@ import Axios from 'axios';
 
 export default class GameForm extends Component {
 
-    changeELO = () => {
+    changeELO = (event) => {
+        event.preventDefault();
+        console.log({
+            player1 : parseInt(document.getElementById('player1').value),
+            player2 : parseInt(document.getElementById('player2').value)
+        })
         Axios.post(game+"match", {
                 player1 : parseInt(document.getElementById('player1').value),
                 player2 : parseInt(document.getElementById('player2').value)
