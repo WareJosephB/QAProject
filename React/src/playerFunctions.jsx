@@ -35,7 +35,7 @@ export function deletePlayer(playerNumber){
 }
 
 export function updatePlayer(playerNumber){
-    Axios.put(player+upd+playerNumber, {
+    Axios.put(player+upd+document.getElementById('Player ID').value, {
         name : document.getElementById('Update Name').value
     }).then(response => {
         document.getElementById('Confirm Player').innerHTML = response.data.message;
