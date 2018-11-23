@@ -88,6 +88,8 @@ public class GameDBRepository implements GameRepositoriable {
 		this.util = util;
 	}
 
+	
+	@Transactional(REQUIRED)
 	@Override
 	public String update(SimpleGame simpleGame) {
 		Player player1 = manager.find(Player.class, simpleGame.getPlayer1());

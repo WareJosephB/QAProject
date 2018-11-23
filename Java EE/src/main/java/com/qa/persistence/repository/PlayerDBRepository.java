@@ -67,7 +67,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		Player player1 = manager.find(Player.class, id);
 		if (player1 != null) {
 			player1.setName(player.getName());
-			return player1.getName();
+			return "{\"message\": \"Player updated successfully.\"}";
 		} else {
 			return "{\"message\": \"Player not found.\"}";
 		}

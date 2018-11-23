@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {game} from './const.jsx';
 import Axios from 'axios';
 
-
-
 export default class GameForm extends Component {
 
     changeELO = (event) => {
@@ -24,7 +22,6 @@ export default class GameForm extends Component {
             window.location.reload();
         }
     
-
     render(){
         return (
             

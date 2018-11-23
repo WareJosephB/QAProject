@@ -34,13 +34,11 @@ export default class topTable extends Component {
         )
 }
 
-
     componentWillMount(){
         this.populateTable();
         this.setState({defaultSortName: 'id',
         defaultSortOrder: 'desc'});
 }
-
 
     render() {
       return (  
