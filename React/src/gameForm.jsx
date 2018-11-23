@@ -10,8 +10,8 @@ export default class GameForm extends Component {
         console.log(document.getElementById('player1').value);
         console.log(document.getElementById('player2').value);
         console.log({
-            player1 : document.getElementById('player1').value,
-            player2 : document.getElementById('player2').value
+            player1 : parseInt(document.getElementById('player1').value),
+            player2 : parseInt(document.getElementById('player2').value)
         });
         console.log(game+"match");
         Axios.post(game+"match", {
