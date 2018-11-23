@@ -16,8 +16,6 @@ export default class GameForm extends Component {
             }).then(response => {
                 console.log(response);
                 document.getElementById('Confirm Player').innerHTML = response.data.message;
-            }).catch(function (error) {
-                console.log(error)
             })
             window.location.reload();
         }

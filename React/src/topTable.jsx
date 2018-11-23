@@ -20,8 +20,6 @@ export default class topTable extends Component {
         Axios.get(player+all).then(res => {
             this.setState({
                 players : res.data
-            }).catch((e) => {
-                console.log(e);
             })
         })
     }

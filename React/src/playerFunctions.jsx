@@ -7,8 +7,6 @@ export const addPlayer = (event) => {
         name : document.getElementById('New Name').value
     }).then(response => {
         document.getElementById('Confirm Player').innerHTML = response.data.message;
-    }).catch(function (error) {
-        console.log(error)
     })
     window.location.reload();
 }
@@ -16,16 +14,12 @@ export const addPlayer = (event) => {
 export function getPlayer(playerNumber){
     Axios.get(player+get+playerNumber).then(response => {
         return(response.data);
-    }).catch(function (error) {
-        console.log(error)
     })
 }
 
 export function deletePlayer(playerNumber){
     Axios.delete(player+del+playerNumber).then(response => {
         document.getElementById('Confirm Player').innerHTML = response.data.message;
-    }).catch(function (error) {
-        console.log(error)
     })
     window.location.reload();
 }
@@ -36,8 +30,6 @@ export function updatePlayer(event){
         name : document.getElementById('Update Name').value
     }).then(response => {
         document.getElementById('Confirm Player').innerHTML = response.data.message;
-    }).catch(function (error) {
-        console.log(error)
     })
     window.location.reload();
 }
