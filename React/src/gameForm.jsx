@@ -8,7 +8,8 @@ export default class GameForm extends Component {
 
     changeELO = () => {
         Axios.put(game+"/match", {
-                name : document.getElementById('Update Name').value
+                player1 : document.getElementById('player1').value,
+                player2 : document.getElementById('player2').value
             }).then(response => {
                 document.getElementById('Confirm Player').innerHTML = response.data.message;
             }).catch(function (error) {
