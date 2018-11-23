@@ -80,9 +80,14 @@ public class PlayerLocRepository implements PlayerRepositoriable {
 
 	}
 
-	public static String update(SimpleGame simpleGame) {
-		calc.simpleELO(players.get(simpleGame.getPlayer1()), players.get(simpleGame.getPlayer2()));
-		return "{\"message\": \"ELOs updated.\"}";
+	public String update(SimpleGame simpleGame) {
+		Player player1 = players.get(simpleGame.getPlayer1());
+		Player player2 = players.get(simpleGame.getPlayer2());
+		double winner = player1.getELO();
+		double loser = player2.getELO();
+		player1.updateELO(calc.simpleWin(player1, loser));
+		player2.updateELO(calc.simpleLost(winner, player2));
+		return "{\"message\": \"ELOs updated.\"}"+String.valueOf(simpleGame.getPlayer1());
 	}
 
 }
