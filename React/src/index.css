@@ -7,6 +7,6 @@ div.CC{
     margin : auto;
 }
 
-button.btn btn-danger{
+button.danger:hover{
 	background-color:#FF0000
 }
