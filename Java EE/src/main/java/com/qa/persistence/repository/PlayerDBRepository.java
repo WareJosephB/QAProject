@@ -41,7 +41,7 @@ public class PlayerDBRepository implements PlayerRepositoriable {
 		Player latestPlayer = (Player) q.getResultList().get(0);
 		if (latestPlayer.equals(player)) {
 			id = String.valueOf(latestPlayer.getID());
-		}
+		} //For Mockito testing to work, comment out lines 1-3 above, and message below after 'succesfully'.
 		return "{\"message\": \"Player added successfully. ID number is " + id + ".\"}";
 	}
 

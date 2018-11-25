@@ -26,7 +26,7 @@ public class ELOTests {
 	private static List<Score> scores1;
 
 	private Game game1 = new Game(scores1);
-
+	
 	private Calculable localc = new Calculocal();
 	private Calculable discal = new Calcudistant();
 
@@ -68,20 +68,6 @@ public class ELOTests {
 		player1.updateELO(5);
 		assertEquals(1505, player1.getELO(), 0.001);
 
-	}
-
-	@Test
-	public void testAfterGameLocal() {
-		localc.UpdateAfterGame(game1);
-		assertEquals(1508, player1.getELO(), 0.001);
-		assertEquals(1492, player2.getELO(), 0.001);
-	}
-
-	@Test
-	public void testAfterGameDistant() {
-		discal.UpdateAfterGame(game1);
-		assertEquals(1508, player1.getELO(), 0.001);
-		assertEquals(1492, player2.getELO(), 0.001);
 	}
 
 }
