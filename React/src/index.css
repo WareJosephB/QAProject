@@ -1,8 +1,12 @@
 body.page{
-    background-color : #B84B34;
+    background-color : #0a6c03;
 }
 
 div.CC{
     width : 80%;
     margin : auto;
+}
+
+button.btn btn-danger{
+	background-color:#FF0000
 }
