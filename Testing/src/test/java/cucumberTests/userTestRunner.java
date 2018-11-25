@@ -21,8 +21,8 @@ public class userTestRunner {
 	
 	@BeforeClass
 	public static void setUp() {
-		System.setProperty("webdriver.firefox.driver",
-				"~/Downloads/geckodriver-v0.23.0-linux32/geckodriver");
+		System.setProperty("webdriver.gecko.driver",
+				"/home/joseph/Downloads/geckodriver-v0.23.0-linux32/geckodriver");
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
