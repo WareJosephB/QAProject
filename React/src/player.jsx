@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getPlayer, addPlayer, updatePlayer} from './playerFunctions.jsx'
+import {addPlayer, updatePlayer} from './playerFunctions.jsx'
 
 export default class Player extends Component {
     constructor(props){
