@@ -1,4 +1,4 @@
-const url = 'http://35.205.54.81:';
+const url = 'http://35.242.147.224:';
 const port = '8080';
 
 const root = url+port+'/MultiplayerELO/access/';
