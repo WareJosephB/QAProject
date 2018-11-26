@@ -26,7 +26,7 @@ export default class topTable extends Component {
 
     cellButton(cell, row) {
         return (
-           <button type="button" onClick={() => deletePlayer(row.id)} ClassName='danger'>
+           <button onClick={() => deletePlayer(row.id)} className='btn btn-danger'>
            Delete Player
            </button>
         )
